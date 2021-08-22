@@ -137,5 +137,21 @@ namespace Schlechtums.Core.Common.Extensions
 
             return source.Any(s => selector(s) == true);
         }
+
+        /// <summary>
+        /// Returns a Select, but if the source is null it returns new List&lt;TSelector&gt;.
+        /// </summary>
+        /// <typeparam name="TSource"></typeparam>
+        /// <typeparam name="TSelector"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="selector"></param>
+        /// <returns></returns>
+        public static IEnumerable<TSelector> SelectSafe<TSource, TSelector>(this IEnumerable<TSource> source, Func<TSource, TSelector> selector)
+        {
+            if (source == null)
+                return new List<TSelector>();
+
+            return source.Select(selector);
+        }
     }
 }

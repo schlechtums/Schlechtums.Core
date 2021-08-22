@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Schlechtums.Core.Common.Extensions
 {
@@ -30,6 +31,111 @@ namespace Schlechtums.Core.Common.Extensions
                 return null;
 
             return objects.Join(delimiter);
+        }
+
+        /// <summary>
+        /// Returns if none of the elements match a condition.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="func"></param>
+        /// <returns>True if no elements match the condition.</returns>
+        public static Boolean None<T>(this IEnumerable<T> source, Func<T, Boolean> func)
+        {
+            return source.All(s => !func(s));
+        }
+
+        /// <summary>
+        /// Returns true if an IEnumerable has no elements.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source"></param>
+        /// <returns>True if there are no elements, false otherwise.</returns>
+        public static Boolean None<T>(this IEnumerable<T> source)
+        {
+            return !source.Any();
+        }
+
+        /// <summary>
+        /// Returns if none of the elements match a condition.  Returns true if the IEnumerable is null.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="func"></param>
+        /// <returns>True if no elements match the condition or the IEnumerable is null.</returns>
+        public static Boolean NoneSafe<T>(this IEnumerable<T> source, Func<T, Boolean> func)
+        {
+            if (source == null)
+                return true;
+
+            return source.None(func);
+        }
+
+        /// <summary>
+        /// Returns true if an IEnumerable has no elements or if the IEnumerable is null.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source"></param>
+        /// <returns>True if there are no elements or the IEnumerable is null.</returns>
+        public static Boolean NoneSafe<T>(this IEnumerable<T> source)
+        {
+            return !source.AnySafe();
+        }
+
+        /// <summary>
+        /// Returns if a collection has any matching elements.  If the source is null, returns false.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static Boolean AnySafe<T>(this IEnumerable<T> source)
+        {
+            if (source == null)
+                return false;
+
+            return source.Any();
+        }
+
+        /// <summary>
+        /// Returns if a collection has any matching elements.  If the source is null, returns false.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="selector"></param>
+        /// <returns></returns>
+        public static Boolean AnySafe<T>(this IEnumerable<T> source, Func<T, Boolean> selector)
+        {
+            if (source == null)
+                return false;
+
+            return System.Linq.Enumerable.Any<T>(source, selector);
+        }
+
+        /// <summary>
+        /// Returns if a collection has any matching elements based on a selector with a nullable Boolean return.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="selector"></param>
+        /// <returns></returns>
+        public static Boolean Any<T>(this IEnumerable<T> source, Func<T, Boolean?> selector)
+        {
+            return System.Linq.Enumerable.Any<T>(source, s => selector(s) == true);
+        }
+
+        /// <summary>
+        /// Returns if a collection has any matching elements based on a selector with a nullable Boolean return.  If the source is null, returns false.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="selector"></param>
+        /// <returns></returns>
+        public static Boolean AnySafe<T>(this IEnumerable<T> source, Func<T, Boolean?> selector)
+        {
+            if (source == null)
+                return false;
+
+            return source.Any(s => selector(s) == true);
         }
     }
 }

@@ -10,6 +10,8 @@ namespace Schlechtums.Core.Common.Extensions
 {
     public static class StringExtensions
     {
+        private static Random _Random = new Random();
+
         /// <summary>
         /// Returns a pluralized string ending based on the count of objects in a collection.
         /// </summary>
@@ -248,6 +250,16 @@ namespace Schlechtums.Core.Common.Extensions
                 return ifNullOrWhitespace;
             else
                 return str;
+        }
+
+        /// <summary>
+        /// Returns !str.IsNullOrWhitespace();
+        /// </summary>
+        /// <param name="str">The string</param>
+        /// <returns>True/False</returns>
+        public static Boolean IsValued(this String str)
+        {
+            return !str.IsNullOrWhitespace();
         }
 
         /// <summary>
@@ -994,6 +1006,34 @@ namespace Schlechtums.Core.Common.Extensions
                 return null;
             else
                 return text.Replace(oldValue, newValue);
+        }
+
+        /// <summary>
+        /// Gets a random string of the allowed characters of the specified length.
+        /// </summary>
+        /// <param name="allowedChars">A string containing the allowed characters</param>
+        /// <param name="length">The length of the string</param>
+        /// <returns>A random string</returns>
+        public static String GetRandomString(this String allowedChars, int length)
+        {
+            var stringChars = new Char[length];
+
+            for (int i = 0; i < length; i++)
+            {
+                stringChars[i] = allowedChars[StringExtensions._Random.Next(allowedChars.Length)];
+            }
+
+            return new String(stringChars);
+        }
+
+        /// <summary>
+        /// Gets a random string of just letters
+        /// </summary>
+        /// <param name="length">The length</param>
+        /// <returns>A random string</returns>
+        public static String GetRandomAlphaString(int length = 1)
+        {
+            return "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".GetRandomString(length);
         }
     }
 }

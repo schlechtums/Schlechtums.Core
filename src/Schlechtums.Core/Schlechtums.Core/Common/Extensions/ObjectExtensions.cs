@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Text.Json;
 
 namespace Schlechtums.Core.Common.Extensions
 {
@@ -31,6 +33,21 @@ namespace Schlechtums.Core.Common.Extensions
             }
 
             return retList;
+        }
+
+        /// <summary>
+        /// Serializes an object to JSON.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="includeNonPublic">Include non public members.  Defaults to false.</param>
+        /// <param name="ignoreReferenceLoops">Ignore reference loops.  Defaults to true.</param>
+        /// <returns>The JSON string.</returns>
+        public static String ToJSON(this Object obj)
+        {
+            var options = new JsonSerializerOptions();
+            options.WriteIndented = true;
+            options.IgnoreReadOnlyProperties = true;
+            return JsonSerializer.Serialize(obj, obj.GetType(), options);
         }
     }
 }

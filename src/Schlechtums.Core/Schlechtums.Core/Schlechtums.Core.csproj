@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+	  <Description>Schlechtums core framework.</Description>
+	  <RepositoryType>git</RepositoryType>
+	  <RepositoryUrl>https://github.com/schlechtums/Schlechtums.Core</RepositoryUrl>
+	  <PackageProjectUrl>https://www.nuget.org/packages/Schlechtums.Core</PackageProjectUrl>
+	  <Authors>Brian Adams</Authors>
+	  <Company />
+	  <Version>1.0.0</Version>
+	  <SignAssembly>false</SignAssembly>
+	  <DelaySign>false</DelaySign>
+	  <AssemblyOriginatorKeyFile>Schlechtums.Core.snk</AssemblyOriginatorKeyFile>
+	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Resources\accept.png" />
+    <None Remove="Resources\cancel.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="..\..\..\lib\icons\accept.png" Link="Resources\accept.png" />
+    <Resource Include="..\..\..\lib\icons\add.png" Link="Resources\add.png" />
+    <Resource Include="..\..\..\lib\icons\arrow_refresh_small.png" Link="Resources\arrow_refresh_small.png" />
+    <Resource Include="..\..\..\lib\icons\cancel.png" Link="Resources\cancel.png" />
+    <Resource Include="Resources\accept.png" />
+    <Resource Include="Resources\cancel.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Schlechtums.FastDynamicAccess" Version="2.0.1.37" />
+    <PackageReference Include="System.Threading.AccessControl" Version="5.0.0" />
+  </ItemGroup>
+
+</Project>

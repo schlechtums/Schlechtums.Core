@@ -153,5 +153,61 @@ namespace Schlechtums.Core.Common.Extensions
 
             return source.Select(selector);
         }
+
+        /// <summary>
+        /// Returns a filtered collection of elements based on the where selector.  If the source is null, returns a new List&lt;T&gt;.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="selector"></param>
+        /// <returns></returns>
+        public static IEnumerable<T> WhereSafe<T>(this IEnumerable<T> source, Func<T, Boolean> selector)
+        {
+            if (source == null)
+                return new List<T>();
+
+            return System.Linq.Enumerable.Where<T>(source, selector);
+        }
+
+        /// <summary>
+        /// Returns a filtered collection of elements based on a where selector with a nullable Boolean return.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="selector"></param>
+        /// <returns></returns>
+        public static IEnumerable<T> Where<T>(this IEnumerable<T> source, Func<T, Boolean?> selector)
+        {
+            return System.Linq.Enumerable.Where<T>(source, s => selector(s) == true);
+        }
+
+        /// <summary>
+        /// Returns a filtered collection of elements based on a where selector with a nullable Boolean return.    If the source is null, returns a new List&lt;T&gt;.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="selector"></param>
+        /// <returns></returns>
+        public static IEnumerable<T> WhereSafe<T>(this IEnumerable<T> source, Func<T, Boolean?> selector)
+        {
+            if (source == null)
+                return new List<T>();
+
+            return source.Where(s => selector(s) == true);
+        }
+
+        /// <summary>
+        /// Finds distinct elements based on a key selector.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TKey"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="selector"></param>
+        /// <returns></returns>
+        public static IEnumerable<T> Distinct<T, TKey>(this IEnumerable<T> source, Func<T, TKey> selector)
+        {
+            foreach (var g in source.GroupBy(selector))
+                yield return g.First();
+        }
     }
 }

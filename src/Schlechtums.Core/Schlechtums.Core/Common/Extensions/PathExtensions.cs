@@ -13,9 +13,10 @@ namespace Schlechtums.Core.Common.Extensions
         /// <returns></returns>
         public static String ToVSProjectRootPath(this DirectoryInfo dInfo)
         {
+            var name = dInfo.Name;
             while (dInfo.FullName.Contains("bin"))
                 dInfo = dInfo.Parent;
-            return Path.Combine(dInfo.FullName, dInfo.FullName).EnsureDoesNotStartWith("\\").ToAbsolutePathFromCurrentDirectory();
+            return Path.Combine(dInfo.FullName, name).EnsureDoesNotStartWith("\\").ToAbsolutePathFromCurrentDirectory();
         }
 
         /// <summary>

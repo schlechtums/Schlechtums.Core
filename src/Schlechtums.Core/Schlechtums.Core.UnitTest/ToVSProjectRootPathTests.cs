@@ -23,8 +23,9 @@ namespace Schlechtums.Core.UnitTest
         [Fact]
         public void ToVSProjectRoot_Directory_Test()
         {
-            var d = new DirectoryInfo("TestTypes");
-            Assert.True(Directory.Exists(d.ToVSProjectRootPath()));
+            var dirName = "TestTypes";
+            var d = new DirectoryInfo(dirName);
+            Assert.Equal(dirName, Path.GetFileName(d.ToVSProjectRootPath()));
         }
     }
 }

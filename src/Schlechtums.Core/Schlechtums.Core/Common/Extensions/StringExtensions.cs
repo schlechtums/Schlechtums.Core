@@ -5,6 +5,8 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Xml.Linq;
 
 namespace Schlechtums.Core.Common.Extensions
@@ -1048,6 +1050,71 @@ namespace Schlechtums.Core.Common.Extensions
             {
                 var hash = md5.ComputeHash(Encoding.Default.GetBytes(str));
                 return new Guid(hash);
+            }
+        }
+
+        /// <summary>
+        /// Serializes an object to JSON.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="includeNonPublic">Include non public members.  Defaults to false.</param>
+        /// <param name="ignoreReferenceLoops">Ignore reference loops.  Defaults to true.</param>
+        /// <returns>The JSON string.</returns>
+        public static String ToJSON(this Object obj)
+        {
+            var options = new JsonSerializerOptions();
+            options.WriteIndented = true;
+            options.IgnoreReadOnlyProperties = true;
+            return JsonSerializer.Serialize(obj, obj.GetType(), options);
+        }
+
+        /// <summary>
+        /// Deserializes a JSON string back into an object.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="json"></param>
+        /// <param name="includeNonPublic">Deserialize non public members.  Defaults to false.</param>
+        /// <returns>The object.</returns>
+        public static T FromJSON<T>(this String json)
+        {
+            if (typeof(T) == typeof(XElement))
+                return (T)(dynamic)new XElement(json.FromJSON<String>());
+            else
+            {
+                var options = new JsonSerializerOptions();
+                options.Converters.Add(new DateTimeConverterUsingDateTimeParse());
+                return JsonSerializer.Deserialize<T>(json, options);
+            }
+        }
+
+        //https://docs.microsoft.com/en-us/dotnet/standard/datetime/system-text-json-support#custom-support-for--and--in-
+        public class DateTimeConverterUsingDateTimeParse : JsonConverter<DateTime>
+        {
+            public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                var str = reader.GetString();
+                return str.ToDateTime();
+            }
+
+            public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
+            {
+                writer.WriteStringValue(value.ToString());
+            }
+        }
+
+        public class IntConverterWithStringSupport : JsonConverter<int>
+        {
+            public override int Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                if (reader.TokenType == JsonTokenType.String)
+                    return reader.GetString().ToInt();
+                else
+                    return reader.GetInt32();
+            }
+
+            public override void Write(Utf8JsonWriter writer, int value, JsonSerializerOptions options)
+            {
+                writer.WriteNumberValue(value);
             }
         }
     }

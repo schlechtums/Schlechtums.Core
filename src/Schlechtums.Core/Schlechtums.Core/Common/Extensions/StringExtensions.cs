@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Xml.Linq;
 
@@ -1034,6 +1035,20 @@ namespace Schlechtums.Core.Common.Extensions
         public static String GetRandomAlphaString(int length = 1)
         {
             return "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".GetRandomString(length);
+        }
+
+        /// <summary>
+        /// Gets a guid for a string
+        /// </summary>
+        /// <param name="str">The string</param>
+        /// <returns>The guid</returns>
+        public static Guid ToGuid(this String str)
+        {
+            using (var md5 = MD5.Create())
+            {
+                var hash = md5.ComputeHash(Encoding.Default.GetBytes(str));
+                return new Guid(hash);
+            }
         }
     }
 }

@@ -49,5 +49,18 @@ namespace Schlechtums.Core.Common.Extensions
             options.IgnoreReadOnlyProperties = true;
             return JsonSerializer.Serialize(obj, obj.GetType(), options);
         }
+
+        /// <summary>
+        /// Safe ToString.  If the object is null it returns null
+        /// </summary>
+        /// <param name="obj">The object to call ToString on</param>
+        /// <returns>obj.ToString() or null</returns>
+        public static String ToStringSafe(this Object obj)
+        {
+            if (obj == null)
+                return null;
+            else
+                return obj.ToString();
+        }
     }
 }

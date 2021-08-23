@@ -209,5 +209,19 @@ namespace Schlechtums.Core.Common.Extensions
             foreach (var g in source.GroupBy(selector))
                 yield return g.First();
         }
+
+        /// <summary>
+        /// Returns the collection safe.  Can use in a foreach loop.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source">The source list</param>
+        /// <returns>The collection if not null, otherwise an empty List</returns>
+        public static IEnumerable<T> Safe<T>(this IEnumerable<T> source)
+        {
+            if (source == null)
+                return new List<T>();
+            else
+                return source;
+        }
     }
 }

@@ -187,38 +187,8 @@ namespace Schlechtums.Core.Common.Extensions
         {
             var typeFilter = filter == null ? null : new HashSet<String>(filter);
 
-            Assembly asm = null;
-            try
-            {
-                //try to load assembly in reflection only mode
-                asm = Assembly.ReflectionOnlyLoadFrom(assemblyPath);
-            }
-            catch
-            {
-                return new List<TypeFromAssemblyInfo>();
-                //if it fails it's not a .NET assembly... ignore
-            }
-
-            Type[] assemblyTypes = null;
-            AppDomain d = null;
-
-            try
-            {
-                //create an app domain in which to load the assembly.. this is the only way to unload assemblies which had no ICCCModule types
-                d = AppDomain.CreateDomain(assemblyPath);
-                asm = d.Load(File.ReadAllBytes(assemblyPath));
-                assemblyTypes = asm.GetTypes();
-            }
-            catch
-            {
-                if (d != null)
-                {
-                    AppDomain.Unload(d);
-
-                    asm = Assembly.ReflectionOnlyLoadFrom(assemblyPath);
-                    assemblyTypes = asm.GetTypes();
-                }
-            }
+            var asm = Assembly.LoadFrom(assemblyPath);
+            var assemblyTypes = asm.GetTypes();
 
             //get all types which either
             //1) derive the base type or implement the interface
@@ -229,23 +199,13 @@ namespace Schlechtums.Core.Common.Extensions
                 match(t) &&                                                 //and match the passed in selector function
                 (typeFilter == null || typeFilter.Contains(t.FullName))); //and the type filter contains this type or it is null (don't apply any filter)
 
-            var ret = types.Select(t =>
+            return types.Select(t =>
                 new TypeFromAssemblyInfo
                 {
                     Fullpath = Path.GetFullPath(assemblyPath),
                     AssemblyFullName = asm.FullName,
                     Type = t
                 });
-
-            //unload the app domain if the types weren't found
-            try
-            {
-                if (!types.Any() && d != null)
-                    AppDomain.Unload(d);
-            }
-            catch { }
-
-            return ret;
         }
     }
 }

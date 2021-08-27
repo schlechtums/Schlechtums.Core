@@ -223,5 +223,18 @@ namespace Schlechtums.Core.Common.Extensions
             else
                 return source;
         }
+
+        /// <summary>
+        /// Performs a select based off of a distinct using a key selector.
+        /// </summary>
+        /// <typeparam name="TSource"></typeparam>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="selector">Function to return the values to be distincted and then selected</param>
+        /// <returns>An enumeration of the distinct values from the collection</returns>
+        public static IEnumerable<TResult> SelectDistinct<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector)
+        {
+            return source.Distinct(selector).Select(selector);
+        }
     }
 }

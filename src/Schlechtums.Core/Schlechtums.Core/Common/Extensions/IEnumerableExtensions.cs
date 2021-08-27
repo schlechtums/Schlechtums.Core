@@ -236,5 +236,86 @@ namespace Schlechtums.Core.Common.Extensions
         {
             return source.Distinct(selector).Select(selector);
         }
+
+        /// <summary>
+        /// SQL keyword IN.  Returns false if the array is null.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="obj"></param>
+        /// <param name="set"></param>
+        /// <returns>True/False</returns>
+        public static Boolean InSafe<T>(this T obj, params T[] set)
+        {
+            if (set == null)
+                return false;
+            else
+                return obj.In(set);
+        }
+
+        /// <summary>
+        /// SQL keyword IN
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="obj"></param>
+        /// <param name="set"></param>
+        /// <returns>True/False</returns>
+        public static Boolean In<T>(this T obj, params T[] set)
+        {
+            return set.Contains(obj);
+        }
+
+        /// <summary>
+        /// SQL keyword IN.  Returns false if the HashSest is null
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="obj"></param>
+        /// <param name="set"></param>
+        /// <returns>True/False</returns>
+        public static Boolean InSafe<T>(this T obj, HashSet<T> set)
+        {
+            if (set == null)
+                return false;
+            else
+                return obj.In(set);
+        }
+
+        /// <summary>
+        /// SQL keyword IN
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="obj"></param>
+        /// <param name="set"></param>
+        /// <returns>True/False</returns>
+        public static Boolean In<T>(this T obj, HashSet<T> set)
+        {
+            return set.Contains(obj);
+        }
+
+        /// <summary>
+        /// SQL keyword IN.  Returns false if the list is false
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="obj"></param>
+        /// <param name="set"></param>
+        /// <returns>True/False</returns>
+        public static Boolean InSafe<T>(this T obj, List<T> set)
+        {
+            if (set == null)
+                return false;
+            else
+                return obj.In(set);
+        }
+
+        /// <summary>
+        /// SQL keyword IN
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="obj"></param>
+        /// <param name="set"></param>
+        /// <returns>True/False</returns>
+        public static Boolean In<T>(this T obj, List<T> set)
+        {
+            return set.Contains(obj);
+        }
     }
 }

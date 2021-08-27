@@ -1054,6 +1054,28 @@ namespace Schlechtums.Core.Common.Extensions
         }
 
         /// <summary>
+        /// Surrounds a string with a character
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="c">The character with which to surround the string</param>
+        /// <returns>The string surrounded by the character</returns>
+        public static String SurroundWith(this String str, Char c)
+        {
+            return str.SurroundWith(c.ToString());
+        }
+
+        /// <summary>
+        /// Surrounds a string with a string
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="s">The string with which to surround the string</param>
+        /// <returns>The string surrounded by the string</returns>
+        public static String SurroundWith(this String str, String s)
+        {
+            return s + str + s;
+        }
+
+        /// <summary>
         /// Serializes an object to JSON.
         /// </summary>
         /// <param name="obj"></param>

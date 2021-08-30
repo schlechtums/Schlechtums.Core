@@ -31,7 +31,7 @@ namespace Schlechtums.Core.UnitTest
 
             rw.Add(values);
 
-            Assert.Equal(values.Skip(Math.Max(0, values.Length - windowSize)).Average(), rw.Select(n => n).Average());
+            Assert.Equal(values.Skip(Math.Max(0, values.Length - windowSize)).Average(), rw.Average());
         }
     }
 }

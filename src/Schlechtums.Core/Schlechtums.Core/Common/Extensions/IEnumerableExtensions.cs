@@ -394,5 +394,59 @@ namespace Schlechtums.Core.Common.Extensions
                 ret.Add(kvp.Value, kvp.Key);
             return ret;
         }
+
+        public static List<TKey> FindDuplicateKeys<TValue, TKey>(this IEnumerable<TValue> source, Func<TValue, TKey> keySelector)
+        {
+            return source.GroupBy(keySelector).Where(g => g.Count() > 1).Select(g => g.Key).ToList();
+        }
+
+        /// <summary>
+        /// Returns the count of a collection.  If the source is null, returns 0.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="selector"></param>
+        /// <returns></returns>
+        public static int CountSafe<T>(this IEnumerable<T> source, Func<T, Boolean> selector)
+        {
+            if (source == null)
+                return 0;
+
+            return System.Linq.Enumerable.Count<T>(source, selector);
+        }
+
+        /// <summary>
+        /// Returns the count of a collection.  If the source is null, returns 0.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static int CountSafe<T>(this IEnumerable<T> source)
+        {
+            if (source == null)
+                return 0;
+
+            return System.Linq.Enumerable.Count<T>(source);
+        }
+
+        /// <summary>
+        /// Returns the number of items of a collection that match a selector with a nullable Boolean return.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="selector"></param>
+        /// <returns></returns>
+        public static int Count<T>(this IEnumerable<T> source, Func<T, Boolean?> selector)
+        {
+            return System.Linq.Enumerable.Count<T>(source, s => selector(s) == true);
+        }
+
+        public static List<T> ToListSafe<T>(this IEnumerable<T> source)
+        {
+            if (source == null)
+                return new List<T>();
+            else
+                return source.ToList();
+        }
     }
 }

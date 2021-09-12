@@ -40,5 +40,22 @@ namespace Schlechtums.Core.Common.Extensions
 
             return dict.TryGetValue(key, defaultValue);
         }
+
+        /// <summary>
+        /// Copies all key/value pairs from one dictionary to a new Dictionary<TKey, TValue>.
+        /// </summary>
+        /// <typeparam name="TKey"></typeparam>
+        /// <typeparam name="TValue"></typeparam>
+        /// <param name="source">The source dictionary.</param>
+        /// <returns>The copied dictionary.</returns>
+        public static Dictionary<TKey, TValue> Copy<TKey, TValue>(this Dictionary<TKey, TValue> source)
+        {
+            var ret = new Dictionary<TKey, TValue>(source.Count);
+
+            foreach (var kvp in source)
+                ret.Add(kvp.Key, kvp.Value);
+
+            return ret;
+        }
     }
 }

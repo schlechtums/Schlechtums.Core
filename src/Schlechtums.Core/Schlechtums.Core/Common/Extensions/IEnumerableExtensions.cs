@@ -386,5 +386,13 @@ namespace Schlechtums.Core.Common.Extensions
 
             return ret;
         }
+
+        public static Dictionary<TValue, TKey> ToReverseDictionary<TKey, TValue>(this IDictionary<TKey, TValue> dict)
+        {
+            var ret = new Dictionary<TValue, TKey>();
+            foreach (var kvp in dict)
+                ret.Add(kvp.Value, kvp.Key);
+            return ret;
+        }
     }
 }

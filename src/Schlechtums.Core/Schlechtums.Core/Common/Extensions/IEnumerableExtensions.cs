@@ -317,5 +317,74 @@ namespace Schlechtums.Core.Common.Extensions
         {
             return set.Contains(obj);
         }
+
+        /// <summary>
+        /// Groups an enumerable by a key selector and then creates a dictionary of TKey, List&lt;TValue&gt; from the groups.
+        /// </summary>
+        /// <typeparam name="TKey"></typeparam>
+        /// <typeparam name="TValue"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="keySelector">The key selector function.</param>
+        /// <returns>The dictionary.</returns>
+        public static Dictionary<TKey, List<TValue>> ToListDictionary<TKey, TValue>(this IEnumerable<TValue> source, Func<TValue, TKey> keySelector)
+        {
+            return source.GroupBy(keySelector).ToDictionary(g => g.Key, g => g.ToList());
+        }
+
+        /// <summary>
+        /// Groups an enumerable by a key selector and then creates a dictionary of TKey, List&lt;TValue&gt; from the groups.
+        /// </summary>
+        /// <typeparam name="TKey"></typeparam>
+        /// <typeparam name="TValue"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="keySelector">The key selector function.</param>
+        /// <param name="valueSelector">A function which modifies each value before being placed in a List</param>
+        /// <returns>The dictionary.</returns>
+        public static Dictionary<TKey, List<TListValue>> ToListDictionary<TKey, TValue, TListValue>(this IEnumerable<TValue> source, Func<TValue, TKey> keySelector, Func<TValue, TListValue> valueSelector)
+        {
+            return source.GroupBy(keySelector).ToDictionary(g => g.Key, g => g.Select(gs => valueSelector(gs)).ToList());
+        }
+
+        public static DictionaryEx<TKey, TValue> ToDictionary<TKey, TSource, TValue>(IEnumerable<TSource> source, Func<TSource, int, TKey> keySelector, Func<TSource, int, TValue> valueSelector = null)
+        {
+            var ret = new DictionaryEx<TKey, TValue>();
+            if (source.NoneSafe())
+                return ret;
+
+            if (valueSelector == null)
+                valueSelector = (s, i) => (TValue)(dynamic)s;
+
+            var curr = 0;
+            foreach (var s in source)
+            {
+                ret[keySelector(s, curr)] = valueSelector(s, curr);
+                curr++;
+            }
+
+            return ret;
+        }
+
+        public static Dictionary<String, String> ToDictionarySafe(this IEnumerable<String[]> source, Func<String[], String> keySelector, Func<String[], String> elementSelector, String separator)
+        {
+            if (source == null)
+                return null;
+
+            var ret = new Dictionary<String, String>();
+
+            foreach (var s in source)
+            {
+                var key = keySelector(s);
+                if (ret.ContainsKey(key))
+                {
+                    ret[key] += String.Format("{0}{1}", separator, elementSelector(s));
+                }
+                else
+                {
+                    ret.Add(key, elementSelector(s));
+                }
+            }
+
+            return ret;
+        }
     }
 }

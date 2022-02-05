@@ -17,7 +17,7 @@ namespace Schlechtums.Core.Common
             : this(Path.GetRandomFileName().Split('.')[0])
         { }
 
-        public TemporaryDirectory(Boolean create)
+        public TemporaryDirectory(bool create)
             : this(Path.GetRandomFileName().Split('.')[0], create)
         { }
 
@@ -25,229 +25,229 @@ namespace Schlechtums.Core.Common
         /// Instantiate a temporary directory class.  Does not create the directory.
         /// </summary>
         /// <param name="dir">The name of the directory.</param>
-        public TemporaryDirectory(String dir)
+        public TemporaryDirectory(string dir)
             : this(dir, false)
         { }
 
-        public TemporaryDirectory(String dir, Boolean create)
+        public TemporaryDirectory(string dir, bool create)
         {
-            this.m_Dir = Path.GetFullPath(dir);
+            this.dir = Path.GetFullPath(dir);
             if (!this.Exists())
-                Directory.CreateDirectory(this.m_Dir);
+                Directory.CreateDirectory(this.dir);
         }
 
-        private String m_Dir;
+        private string dir;
 
         #region <<< static System.IO.Directory methods >>>
         public DirectoryInfo GetParent()
         {
-            return Directory.GetParent(this.m_Dir);
+            return Directory.GetParent(this.dir);
         }
 
-        public Boolean Exists()
+        public bool Exists()
         {
-            return Directory.Exists(this.m_Dir);
+            return Directory.Exists(this.dir);
         }
 
         public void SetCreationTime(DateTime creationTime)
         {
-            Directory.SetCreationTime(this.m_Dir, creationTime);
+            Directory.SetCreationTime(this.dir, creationTime);
         }
 
         public void SetCreationTimeUtc(DateTime creationTimeUtc)
         {
-            Directory.SetCreationTimeUtc(this.m_Dir, creationTimeUtc);
+            Directory.SetCreationTimeUtc(this.dir, creationTimeUtc);
         }
 
         public DateTime GetCreationTime()
         {
-            return Directory.GetCreationTime(this.m_Dir);
+            return Directory.GetCreationTime(this.dir);
         }
 
         public DateTime GetCreationTimeUtc()
         {
-            return Directory.GetCreationTimeUtc(this.m_Dir);
+            return Directory.GetCreationTimeUtc(this.dir);
         }
 
         public void SetLastWriteTime(DateTime lastWriteTime)
         {
-            Directory.SetLastWriteTime(this.m_Dir, lastWriteTime);
+            Directory.SetLastWriteTime(this.dir, lastWriteTime);
         }
 
         public void SetLastWriteTimeUtc(DateTime lastWriteTimeUtc)
         {
-            Directory.SetLastWriteTimeUtc(this.m_Dir, lastWriteTimeUtc);
+            Directory.SetLastWriteTimeUtc(this.dir, lastWriteTimeUtc);
         }
 
         public DateTime GetLastWriteTime()
         {
-            return Directory.GetLastWriteTime(this.m_Dir);
+            return Directory.GetLastWriteTime(this.dir);
         }
 
         public DateTime GetLastWriteTimeUtc()
         {
-            return Directory.GetLastWriteTimeUtc(this.m_Dir);
+            return Directory.GetLastWriteTimeUtc(this.dir);
         }
 
         public void SetLastAccessTime(DateTime lastAccessTime)
         {
-            Directory.SetLastAccessTime(this.m_Dir, lastAccessTime);
+            Directory.SetLastAccessTime(this.dir, lastAccessTime);
         }
 
         public void SetLastAccessTimeUtc(DateTime lastAccessTimeUtc)
         {
-            Directory.SetLastAccessTimeUtc(this.m_Dir, lastAccessTimeUtc);
+            Directory.SetLastAccessTimeUtc(this.dir, lastAccessTimeUtc);
         }
 
         public DateTime GetLastAccessTime()
         {
-            return Directory.GetLastAccessTime(this.m_Dir);
+            return Directory.GetLastAccessTime(this.dir);
         }
 
         public DateTime GetLastAccessTimeUtc()
         {
-            return Directory.GetLastAccessTimeUtc(this.m_Dir);
+            return Directory.GetLastAccessTimeUtc(this.dir);
         }
 
-        public String[] GetFiles()
+        public string[] GetFiles()
         {
-            return Directory.GetFiles(this.m_Dir);
+            return Directory.GetFiles(this.dir);
         }
 
-        public String[] GetFiles(String searchPattern)
+        public string[] GetFiles(string searchPattern)
         {
-            return Directory.GetFiles(this.m_Dir, searchPattern);
+            return Directory.GetFiles(this.dir, searchPattern);
         }
 
-        public String[] GetFiles(String searchPattern, SearchOption searchOption)
+        public string[] GetFiles(string searchPattern, SearchOption searchOption)
         {
-            return Directory.GetFiles(this.m_Dir, searchPattern, searchOption);
+            return Directory.GetFiles(this.dir, searchPattern, searchOption);
         }
 
-        public String[] GetDirectories()
+        public string[] GetDirectories()
         {
-            return Directory.GetDirectories(this.m_Dir);
+            return Directory.GetDirectories(this.dir);
         }
 
-        public String[] GetDirectories(String searchPattern)
+        public string[] GetDirectories(string searchPattern)
         {
-            return Directory.GetDirectories(this.m_Dir, searchPattern);
+            return Directory.GetDirectories(this.dir, searchPattern);
         }
 
-        public String[] GetDirectories(String searchPattern, SearchOption searchOption)
+        public string[] GetDirectories(string searchPattern, SearchOption searchOption)
         {
-            return Directory.GetDirectories(this.m_Dir, searchPattern, searchOption);
+            return Directory.GetDirectories(this.dir, searchPattern, searchOption);
         }
 
-        public String[] GetFileSystemEntries()
+        public string[] GetFileSystemEntries()
         {
-            return Directory.GetFileSystemEntries(this.m_Dir);
+            return Directory.GetFileSystemEntries(this.dir);
         }
 
-        public String[] GetFileSystemEntries(String searchPattern)
+        public string[] GetFileSystemEntries(string searchPattern)
         {
-            return Directory.GetFileSystemEntries(this.m_Dir, searchPattern);
+            return Directory.GetFileSystemEntries(this.dir, searchPattern);
         }
 
-        public String[] GetFileSystemEntries(String searchPattern, SearchOption searchOption)
+        public string[] GetFileSystemEntries(string searchPattern, SearchOption searchOption)
         {
-            return Directory.GetFileSystemEntries(this.m_Dir, searchPattern, searchOption);
+            return Directory.GetFileSystemEntries(this.dir, searchPattern, searchOption);
         }
 
-        public IEnumerable<String> EnumerateDirectories()
+        public IEnumerable<string> EnumerateDirectories()
         {
-            return Directory.EnumerateDirectories(this.m_Dir);
+            return Directory.EnumerateDirectories(this.dir);
         }
 
-        public IEnumerable<String> EnumerateDirectories(String searchPattern)
+        public IEnumerable<string> EnumerateDirectories(string searchPattern)
         {
-            return Directory.EnumerateDirectories(this.m_Dir, searchPattern);
+            return Directory.EnumerateDirectories(this.dir, searchPattern);
         }
 
-        public IEnumerable<String> EnumerateDirectories(String searchPattern, SearchOption searchOption)
+        public IEnumerable<string> EnumerateDirectories(string searchPattern, SearchOption searchOption)
         {
-            return Directory.EnumerateDirectories(this.m_Dir, searchPattern, searchOption);
+            return Directory.EnumerateDirectories(this.dir, searchPattern, searchOption);
         }
 
-        public IEnumerable<String> EnumerateFiles()
+        public IEnumerable<string> EnumerateFiles()
         {
-            return Directory.EnumerateFiles(this.m_Dir);
+            return Directory.EnumerateFiles(this.dir);
         }
 
-        public IEnumerable<String> EnumerateFiles(String searchPattern)
+        public IEnumerable<string> EnumerateFiles(string searchPattern)
         {
-            return Directory.EnumerateFiles(this.m_Dir, searchPattern);
+            return Directory.EnumerateFiles(this.dir, searchPattern);
         }
 
-        public IEnumerable<String> EnumerateFiles(String searchPattern, SearchOption searchOption)
+        public IEnumerable<string> EnumerateFiles(string searchPattern, SearchOption searchOption)
         {
-            return Directory.EnumerateFiles(this.m_Dir, searchPattern, searchOption);
+            return Directory.EnumerateFiles(this.dir, searchPattern, searchOption);
         }
 
-        public IEnumerable<String> EnumerateFileSystemEntries()
+        public IEnumerable<string> EnumerateFileSystemEntries()
         {
-            return Directory.EnumerateFileSystemEntries(this.m_Dir);
+            return Directory.EnumerateFileSystemEntries(this.dir);
         }
 
-        public IEnumerable<String> EnumerateFileSystemEntries(String searchPattern)
+        public IEnumerable<string> EnumerateFileSystemEntries(string searchPattern)
         {
-            return Directory.EnumerateFileSystemEntries(this.m_Dir, searchPattern);
+            return Directory.EnumerateFileSystemEntries(this.dir, searchPattern);
         }
 
-        public IEnumerable<String> EnumerateFileSystemEntries(String searchPattern, SearchOption searchOption)
+        public IEnumerable<string> EnumerateFileSystemEntries(string searchPattern, SearchOption searchOption)
         {
-            return Directory.EnumerateFileSystemEntries(this.m_Dir, searchPattern, searchOption);
+            return Directory.EnumerateFileSystemEntries(this.dir, searchPattern, searchOption);
         }
 
-        public String GetDirectoryRoot()
+        public string GetDirectoryRoot()
         {
-            return Directory.GetDirectoryRoot(this.m_Dir);
+            return Directory.GetDirectoryRoot(this.dir);
         }
 
         public void SetCurrentDirectory()
         {
-            Directory.SetCurrentDirectory(this.m_Dir);
+            Directory.SetCurrentDirectory(this.dir);
         }
 
-        public void Move(String sourceDirName, String destDirName)
+        public void Move(string sourceDirName, string destDirName)
         {
-            Directory.Move(this.m_Dir, destDirName);
+            Directory.Move(this.dir, destDirName);
         }
 
         public void Delete()
         {
-            Directory.Delete(this.m_Dir);
+            Directory.Delete(this.dir);
         }
 
-        public void Delete(Boolean recursive)
+        public void Delete(bool recursive)
         {
-            Directory.Delete(this.m_Dir, recursive);
+            Directory.Delete(this.dir, recursive);
         }
         #endregion
 
-        public static implicit operator String(TemporaryDirectory td)
+        public static implicit operator string(TemporaryDirectory td)
         {
             return td.ToString();
         }
 
         public override string ToString()
         {
-            return this.m_Dir;
+            return this.dir;
         }
 
-        public String DirectoryName
+        public string DirectoryName
         {
-            get { return Path.GetFullPath(this.m_Dir); }
+            get { return Path.GetFullPath(this.dir); }
         }
 
         public void Dispose()
         {
-            if (Directory.Exists(this.m_Dir))
+            if (Directory.Exists(this.dir))
             {
                 try
                 {
                     //sometimes Directory.Delete will not delete a directory, but rmdir on the command prompt will
-                    ProcessExtensions.RunProcessInBackgroundAndGetStandardOutput("cmd", String.Format("/c rmdir /q /s \"{0}\"", this.m_Dir));
+                    ProcessExtensions.RunProcessInBackgroundAndGetStandardOutput("cmd", string.Format("/c rmdir /q /s \"{0}\"", this.dir));
                 }
                 catch { }
             }

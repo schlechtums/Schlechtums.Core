@@ -9,9 +9,9 @@ namespace Schlechtums.Core.Common.Extensions
         /// <summary>
         /// Safe ToString.  If the date time is null it returns null
         /// </summary>
-        /// <param name="obj">The date time to call ToString on</param>
+        /// <param name="obj">The date time to call Tostring on</param>
         /// <returns>obj.ToString() or null</returns>
-        public static String ToStringSafe(this DateTime? obj)
+        public static string ToStringSafe(this DateTime? obj)
         {
             if (obj == null)
                 return null;
@@ -22,10 +22,10 @@ namespace Schlechtums.Core.Common.Extensions
         /// <summary>
         /// Safe ToString.  If the date time is null it returns null
         /// </summary>
-        /// <param name="obj">The date time to call ToString on</param>
+        /// <param name="obj">The date time to call Tostring on</param>
         /// <param name="format">The date time format</param>
         /// <returns>obj.ToString() or null</returns>
-        public static String ToStringSafe(this DateTime? obj, String format)
+        public static string ToStringSafe(this DateTime? obj, string format)
         {
             if (obj == null)
                 return null;

@@ -10,7 +10,7 @@ namespace Schlechtums.Core.BaseClasses
     public abstract class NotifyPropertyChanged : INotifyPropertyChanged, INotifyBeforePropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual Boolean RaisePropertyChanged(String propertyName)
+        protected virtual bool RaisePropertyChanged(string propertyName)
         {
             var handler = this.PropertyChanged;
             if (handler != null)
@@ -24,7 +24,7 @@ namespace Schlechtums.Core.BaseClasses
         }
 
         public event BeforePropertyChangedHandler BeforePropertyChanged;
-        protected virtual Boolean RaiseBeforePropertyChanged(String propertyName, Object oldValue, Object newValue)
+        protected virtual bool RaiseBeforePropertyChanged(string propertyName, Object oldValue, Object newValue)
         {
             var handler = this.BeforePropertyChanged;
             if (handler != null)
@@ -36,7 +36,7 @@ namespace Schlechtums.Core.BaseClasses
             return false;
         }
 
-        protected virtual Boolean RaiseBeforePropertyChanged(List<String> propertyNames, List<Object> oldValues, List<Object> newValues)
+        protected virtual bool RaiseBeforePropertyChanged(List<string> propertyNames, List<Object> oldValues, List<Object> newValues)
         {
             var handler = this.BeforePropertyChanged;
             if (handler != null)

@@ -17,14 +17,14 @@ namespace Schlechtums.Core.BaseClasses
 
     public class BeforePropertyChangedEventArgs
     {
-        public BeforePropertyChangedEventArgs(String propertyName, Object oldValue, Object newValue)
+        public BeforePropertyChangedEventArgs(string propertyName, Object oldValue, Object newValue)
         {
-            this.PropertyNames = new List<String>(1) { propertyName };
+            this.PropertyNames = new List<string>(1) { propertyName };
             this.OldValues = new List<Object>(1) { oldValue };
             this.NewValues = new List<Object>(1) { newValue };
         }
 
-        public BeforePropertyChangedEventArgs(List<String> propertyNames, List<Object> oldValues, List<Object> newValues)
+        public BeforePropertyChangedEventArgs(List<string> propertyNames, List<Object> oldValues, List<Object> newValues)
         {
             if (propertyNames.Count != oldValues.Count || propertyNames.Count != newValues.Count)
                 throw new Exception("Property names count does not match old values count and new values count");
@@ -34,7 +34,7 @@ namespace Schlechtums.Core.BaseClasses
             this.NewValues = newValues;
         }
 
-        public List<String> PropertyNames { get; private set; }
+        public List<string> PropertyNames { get; private set; }
         public List<Object> OldValues { get; private set; }
         public List<Object> NewValues { get; private set; }
     }

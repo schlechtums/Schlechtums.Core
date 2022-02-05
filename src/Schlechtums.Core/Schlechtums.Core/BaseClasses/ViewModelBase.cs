@@ -7,11 +7,11 @@ namespace Schlechtums.Core.BaseClasses
 {
 	public class ExecuteCommandException : Exception
 	{
-		public List<String> ErrorMessages { get; set; }
+		public List<string> ErrorMessages { get; set; }
 
-		public ExecuteCommandException(IEnumerable<String> errorMessages)
+		public ExecuteCommandException(IEnumerable<string> errorMessages)
 		{
-			var asList = errorMessages as List<String>;
+			var asList = errorMessages as List<string>;
 			if (asList != null)
 				this.ErrorMessages = asList;
 			else
@@ -20,7 +20,7 @@ namespace Schlechtums.Core.BaseClasses
 
 		public override string ToString()
 		{
-			return String.Format("Error executing command:{0}{1}", Environment.NewLine, this.ErrorMessages.JoinWithNewline());
+			return string.Format("Error executing command:{0}{1}", Environment.NewLine, this.ErrorMessages.JoinWithNewline());
 		}
 	}
 
@@ -30,15 +30,15 @@ namespace Schlechtums.Core.BaseClasses
         {
         }
 
-        private Boolean m_IsValid;
-        public Boolean IsValid
+        private bool isValid;
+        public bool IsValid
         {
-            get { return this.m_IsValid; }
+            get { return this.isValid; }
             set
             {
-                if (this.m_IsValid != value)
+                if (this.isValid != value)
                 {
-                    this.m_IsValid = value;
+                    this.isValid = value;
                     this.RaisePropertyChanged("IsValid");
                 }
             }

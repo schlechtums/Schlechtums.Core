@@ -24,7 +24,7 @@ namespace Schlechtums.Core.UnitTest.TestTypes
 	}
 
 	/// <summary>
-	/// String.Format to be applied when writing a value into this property.  This attribute may only be used on Strings.
+	/// string.Format to be applied when writing a value into this property.  This attribute may only be used on Strings.
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
 	public sealed class DALWriteStringFormatAttribute : Attribute
@@ -32,19 +32,19 @@ namespace Schlechtums.Core.UnitTest.TestTypes
 		public DALWriteStringFormatAttribute()
 		{ }
 
-		public DALWriteStringFormatAttribute(String format)
+		public DALWriteStringFormatAttribute(string format)
 		{
 			this.Format = format;
 		}
 
 		/// <summary>
-		/// The String.Format string to apply when reading from the database into this property.
+		/// The string.Format string to apply when reading from the database into this property.
 		/// </summary>
-		public String Format { get; set; }
+		public string Format { get; set; }
 	}
 
 	/// <summary>
-	/// String.Format to be applied when reading this property into a SQL Parameter.
+	/// string.Format to be applied when reading this property into a SQL Parameter.
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
 	public sealed class DALReadStringFormatAttribute : Attribute
@@ -52,15 +52,15 @@ namespace Schlechtums.Core.UnitTest.TestTypes
 		public DALReadStringFormatAttribute()
 		{ }
 
-		public DALReadStringFormatAttribute(String format)
+		public DALReadStringFormatAttribute(string format)
 		{
 			this.Format = format;
 		}
 
 		/// <summary>
-		/// The String.Format string to apply when reading from this property into a SqlParameter.
+		/// The string.Format string to apply when reading from this property into a SqlParameter.
 		/// </summary>
-		public String Format { get; set; }
+		public string Format { get; set; }
 	}
 
 	/// <summary>
@@ -79,7 +79,7 @@ namespace Schlechtums.Core.UnitTest.TestTypes
 		public DALSQLParameterNameAttribute()
 		{ }
 
-		public DALSQLParameterNameAttribute(String name)
+		public DALSQLParameterNameAttribute(string name)
 		{
 			this.Name = name;
 		}
@@ -89,7 +89,7 @@ namespace Schlechtums.Core.UnitTest.TestTypes
 		/// When populating a model from a query, the column name from which to read when populating this property.
 		/// When reading into a table parameter type, the column name in which to write when reading this property.
 		/// </summary>
-		public String Name { get; set; }
+		public string Name { get; set; }
 	}
 
 	/// <summary>

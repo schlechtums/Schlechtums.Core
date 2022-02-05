@@ -15,7 +15,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="workingDirectory">The working directory in which to run the process.  Defaults to the current directory if null.</param>
         /// <param name="waitForExit">True or false to wait for the process to exit</param>
         /// <returns>The process object.</returns>
-        public static Process RunProcessInBackground(String process, String arguments, String workingDirectory, Boolean waitForExit = true)
+        public static Process RunProcessInBackground(string process, string arguments, string workingDirectory, bool waitForExit = true)
         {
             var psi = new ProcessStartInfo(process, arguments);
             psi.CreateNoWindow = true;
@@ -42,7 +42,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="arguments">Any arguments.</param>
         /// <param name="workingDirectory">The working directory in which to run the process.  Defaults to the current directory if null.</param>
         /// <returns>The standard out from the process</returns>
-        public static String RunProcessInBackgroundAndGetStandardOutput(String process, String arguments, String workingDirectory = null)
+        public static string RunProcessInBackgroundAndGetStandardOutput(string process, string arguments, string workingDirectory = null)
         {
             var psi = new ProcessStartInfo(process, arguments);
             psi.CreateNoWindow = true;

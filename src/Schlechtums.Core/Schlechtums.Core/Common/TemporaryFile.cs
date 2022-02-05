@@ -17,7 +17,7 @@ namespace Schlechtums.Core.Common
 		/// 
 		/// </summary>
 		/// <param name="file">The file to modify</param>
-		public TemporaryFileWithRestore(String file)
+		public TemporaryFileWithRestore(string file)
 			: this(file, null)
 		{ }
 
@@ -26,25 +26,25 @@ namespace Schlechtums.Core.Common
 		/// </summary>
 		/// <param name="file">The file to modify</param>
 		/// <param name="content">The content to write to</param>
-		public TemporaryFileWithRestore(String file, Byte[] content)
+		public TemporaryFileWithRestore(string file, byte[] content)
 		{
-			this.m_File = Path.GetFullPath(file);
-			this.m_OriginalContent = File.ReadAllBytes(this.m_File);
+			this.file = Path.GetFullPath(file);
+			this.originalContent = File.ReadAllBytes(this.file);
 
 			if (content != null)
 				this.WriteAllBytes(content);
 		}
 
-		private Byte[] m_OriginalContent;
+		private byte[] originalContent;
 
 		public override void Dispose()
 		{
-			File.WriteAllBytes(this.m_File, this.m_OriginalContent);
+			File.WriteAllBytes(this.file, this.originalContent);
 		}
 
-		new public TemporaryFileWithRestore WithExtension(String extension)
+		new public TemporaryFileWithRestore WithExtension(string extension)
 		{
-			this.m_File += extension.EnsureStartsWith(".");
+			this.file += extension.EnsureStartsWith(".");
 			return this;
 		}
 	}
@@ -60,7 +60,7 @@ namespace Schlechtums.Core.Common
 		/// </summary>
 		/// <param name="content">Content as a string</param>
 		/// <returns>The TemporaryFile</returns>
-		public static TemporaryFile WithContent(String content)
+		public static TemporaryFile WithContent(string content)
 		{
 			var tf = new TemporaryFile();
 			tf.WriteAllText(content);
@@ -73,7 +73,7 @@ namespace Schlechtums.Core.Common
 		/// <param name="content">Content as a string</param>
 		/// <param name="ext">The desired extension.</param>
 		/// <returns>The TemporaryFile</returns>
-		public static TemporaryFile WithContent(String content, String ext)
+		public static TemporaryFile WithContent(string content, string ext)
 		{
 			var tf = new TemporaryFile().WithExtension(ext);
 			tf.WriteAllText(content);
@@ -85,7 +85,7 @@ namespace Schlechtums.Core.Common
 		/// </summary>
 		/// <param name="content">Content as a byte array.</param>
 		/// <returns>The TemporaryFile</returns>
-		public static TemporaryFile WithContent(Byte[] content)
+		public static TemporaryFile WithContent(byte[] content)
 		{
 			var tf = new TemporaryFile();
 			tf.WriteAllBytes(content);
@@ -98,7 +98,7 @@ namespace Schlechtums.Core.Common
 		/// <param name="content">Content as a byte array.</param>
 		/// <param name="ext">The desired extension.</param>
 		/// <returns>The TemporaryFile</returns>
-		public static TemporaryFile WithContent(Byte[] content, String ext)
+		public static TemporaryFile WithContent(byte[] content, string ext)
 		{
 			var tf = new TemporaryFile().WithExtension(ext);
 			tf.WriteAllBytes(content);
@@ -110,7 +110,7 @@ namespace Schlechtums.Core.Common
 		/// </summary>
 		/// <param name="content">Content as an enumeration of strings.</param>
 		/// <returns>The TemporaryFile</returns>
-		public static TemporaryFile WithContent(IEnumerable<String> content)
+		public static TemporaryFile WithContent(IEnumerable<string> content)
 		{
 			var tf = new TemporaryFile();
 			tf.WriteAllLines(content.ToArray());
@@ -123,7 +123,7 @@ namespace Schlechtums.Core.Common
 		/// <param name="content">Content as an enumeration of strings.</param>
 		/// <param name="ext">The desired extension.</param>
 		/// <returns>The TemporaryFile</returns>
-		public static TemporaryFile WithContent(IEnumerable<String> content, String ext)
+		public static TemporaryFile WithContent(IEnumerable<string> content, string ext)
 		{
 			var tf = new TemporaryFile().WithExtension(ext);
 			tf.WriteAllLines(content.ToArray());
@@ -135,14 +135,14 @@ namespace Schlechtums.Core.Common
 			return TemporaryFile.FromObjectContentHelper(new TemporaryFile(), content);
 		}
 
-		public static TemporaryFile WithContent(Object content, String ext)
+		public static TemporaryFile WithContent(Object content, string ext)
 		{
 			return TemporaryFile.FromObjectContentHelper(new TemporaryFile().WithExtension(ext), content);
 		}
 
 		private static TemporaryFile FromObjectContentHelper(TemporaryFile tf, Object content)
 		{
-			var bytes = content as Byte[];
+			var bytes = content as byte[];
 			if (bytes != null)
 				tf.WriteAllBytes(bytes);
 			else
@@ -151,7 +151,7 @@ namespace Schlechtums.Core.Common
 				if (@string != null)
 					tf.WriteAllText(content as String);
 				else
-					tf.WriteAllLines((content as IEnumerable<String>).ToArray());
+					tf.WriteAllLines((content as IEnumerable<string>).ToArray());
 			}
 
 			return tf;
@@ -166,7 +166,7 @@ namespace Schlechtums.Core.Common
 		/// 
 		/// </summary>
 		/// <param name="throwExceptionOnDelete">True/False to throw an exception if one happens when disposing</param>
-		public TemporaryFile(Boolean throwExceptionOnDelete)
+		public TemporaryFile(bool throwExceptionOnDelete)
 			: this(Path.Combine(Path.GetTempPath(), Path.GetRandomFileName()), throwExceptionOnDelete)
 		{ }
 
@@ -174,7 +174,7 @@ namespace Schlechtums.Core.Common
 		/// 
 		/// </summary>
 		/// <param name="fileName">A specific name for the temporary file</param>
-		public TemporaryFile(String fileName)
+		public TemporaryFile(string fileName)
 			: this(fileName, false)
 		{ }
 
@@ -183,52 +183,52 @@ namespace Schlechtums.Core.Common
 		/// </summary>
 		/// <param name="fileName">A specific name for the temporary file</param>
 		/// <param name="throwExceptionOnDelete">True/False to throw an exception if one happens when disposing</param>
-		public TemporaryFile(String fileName, Boolean throwExceptionOnDelete)
+		public TemporaryFile(string fileName, bool throwExceptionOnDelete)
 		{
-			this.m_File = Path.GetFullPath(fileName);
-			this.m_ThrowExceptionOnDelete = throwExceptionOnDelete;
+			this.file = Path.GetFullPath(fileName);
+			this.throwExceptionOnDelete = throwExceptionOnDelete;
 		}
 
-		protected String m_File;
-		protected Boolean m_ThrowExceptionOnDelete;
+		protected string file;
+		protected bool throwExceptionOnDelete;
 
-		public String FullPath { get { return this.m_File; } }
+		public string FullPath { get { return this.file; } }
 
 		public virtual void Dispose()
 		{
-			if (!this.m_File.IsNullOrWhitespace() && File.Exists(this.m_File))
+			if (!this.file.IsNullOrWhitespace() && File.Exists(this.file))
 			{
 				try
 				{
-					File.Delete(this.m_File);
+					File.Delete(this.file);
 				}
 				catch
 				{
-					if (this.m_ThrowExceptionOnDelete)
+					if (this.throwExceptionOnDelete)
 						throw;
 				}
 			}
 		}
 
 		#region <<< Static System.IO.File methods >>>
-		public void AppendAllText(String contents)
+		public void AppendAllText(string contents)
 		{
 			this.WriteAllText(this.ReadAllText() + contents);
 		}
 
-		public void AppendAllText(String contents, Encoding encoding)
+		public void AppendAllText(string contents, Encoding encoding)
 		{
 			this.WriteAllText(this.ReadAllText() + contents, encoding);
 		}
 
-		public void AppendAllLines(IEnumerable<String> contents)
+		public void AppendAllLines(IEnumerable<string> contents)
 		{
 			var lines = this.ReadAllLines().ToList();
 			lines.AddRange(contents);
 			this.WriteAllLines(lines.ToArray());
 		}
 
-		public void AppendAllLines(IEnumerable<String> contents, Encoding encoding)
+		public void AppendAllLines(IEnumerable<string> contents, Encoding encoding)
 		{
 			var lines = this.ReadAllLines().ToList();
 			lines.AddRange(contents);
@@ -237,105 +237,105 @@ namespace Schlechtums.Core.Common
 
 		public StreamWriter AppendText()
 		{
-			return File.AppendText(this.m_File);
+			return File.AppendText(this.file);
 		}
 
-		public void Copy(String destFileName)
+		public void Copy(string destFileName)
 		{
-			File.Copy(this.m_File, destFileName);
+			File.Copy(this.file, destFileName);
 		}
 
-		public void Copy(String destFileName, Boolean overwrite)
+		public void Copy(string destFileName, bool overwrite)
 		{
-			File.Copy(this.m_File, destFileName, overwrite);
+			File.Copy(this.file, destFileName, overwrite);
 		}
 
 		public void Decrypt()
 		{
-			File.Decrypt(this.m_File);
+			File.Decrypt(this.file);
 		}
 
 		public void Encrypt()
 		{
-			File.Encrypt(this.m_File);
+			File.Encrypt(this.file);
 		}
 
-		public Boolean Exists()
+		public bool Exists()
 		{
-			return File.Exists(this.m_File);
+			return File.Exists(this.file);
 		}
 
 		public FileAttributes GetAttributes()
 		{
-			return File.GetAttributes(this.m_File);
+			return File.GetAttributes(this.file);
 		}
 
 		public DateTime GetCreationTime()
 		{
-			return File.GetCreationTime(this.m_File);
+			return File.GetCreationTime(this.file);
 		}
 
 		public DateTime GetCreationTimeUtc()
 		{
-			return File.GetCreationTimeUtc(this.m_File);
+			return File.GetCreationTimeUtc(this.file);
 		}
 
 		public DateTime GetLastAccessTime()
 		{
-			return File.GetLastAccessTime(this.m_File);
+			return File.GetLastAccessTime(this.file);
 		}
 
 		public DateTime GetLastAccessTimeUtc()
 		{
-			return File.GetLastAccessTimeUtc(this.m_File);
+			return File.GetLastAccessTimeUtc(this.file);
 		}
 
 		public DateTime GetLastWriteTime()
 		{
-			return File.GetLastWriteTime(this.m_File);
+			return File.GetLastWriteTime(this.file);
 		}
 
 		public DateTime GetLastWriteTimeUtc()
 		{
-			return File.GetLastWriteTimeUtc(this.m_File);
+			return File.GetLastWriteTimeUtc(this.file);
 		}
 
 		public void Move(string destFileName)
 		{
-			File.Move(this.m_File, destFileName);
+			File.Move(this.file, destFileName);
 		}
 
 		public FileStream Open(FileMode mode)
 		{
-			return File.Open(this.m_File, mode);
+			return File.Open(this.file, mode);
 		}
 
 		public FileStream Open(FileMode mode, FileAccess access)
 		{
-			return File.Open(this.m_File, mode, access);
+			return File.Open(this.file, mode, access);
 		}
 
 		public FileStream Open(FileMode mode, FileAccess access, FileShare share)
 		{
-			return File.Open(this.m_File, mode, access, share);
+			return File.Open(this.file, mode, access, share);
 		}
 
 		public FileStream OpenRead()
 		{
-			return File.OpenRead(this.m_File);
+			return File.OpenRead(this.file);
 		}
 
 		public StreamReader OpenText()
 		{
-			return File.OpenText(this.m_File);
+			return File.OpenText(this.file);
 		}
 
 		public FileStream OpenWrite()
 		{
-			return File.OpenWrite(this.m_File);
+			return File.OpenWrite(this.file);
 		}
 
-		public String TryReadAllText()
+		public string TryReadAllText()
 		{
 			if (this.Exists())
 				return this.ReadAllText();
@@ -343,12 +343,12 @@ namespace Schlechtums.Core.Common
 				return null;
 		}
 
-		public virtual String ReadAllText()
+		public virtual string ReadAllText()
 		{
-			return File.ReadAllText(this.m_File);
+			return File.ReadAllText(this.file);
 		}
 
-		public String TryReadAllText(Encoding encoding)
+		public string TryReadAllText(Encoding encoding)
 		{
 			if (this.Exists())
 				return this.ReadAllText(encoding);
@@ -356,9 +356,9 @@ namespace Schlechtums.Core.Common
 				return null;
 		}
 
-		public virtual String ReadAllText(Encoding encoding)
+		public virtual string ReadAllText(Encoding encoding)
 		{
-			return File.ReadAllText(this.m_File, encoding);
+			return File.ReadAllText(this.file, encoding);
 		}
 
 		public XElement TryReadAsXml()
@@ -387,7 +387,7 @@ namespace Schlechtums.Core.Common
 			return this.ReadAllText(encoding).ToXElement();
 		}
 
-		public String[] TryReadAllLines()
+		public string[] TryReadAllLines()
 		{
 			if (this.Exists())
 				return this.ReadAllLines();
@@ -395,12 +395,12 @@ namespace Schlechtums.Core.Common
 				return null;
 		}
 
-		public virtual String[] ReadAllLines()
+		public virtual string[] ReadAllLines()
 		{
-			return File.ReadAllLines(this.m_File);
+			return File.ReadAllLines(this.file);
 		}
 
-		public String[] TryReadAllLines(Encoding encoding)
+		public string[] TryReadAllLines(Encoding encoding)
 		{
 			if (this.Exists())
 				return this.ReadAllLines(encoding);
@@ -408,12 +408,12 @@ namespace Schlechtums.Core.Common
 				return null;
 		}
 
-		public virtual String[] ReadAllLines(Encoding encoding)
+		public virtual string[] ReadAllLines(Encoding encoding)
 		{
-			return File.ReadAllLines(this.m_File, encoding);
+			return File.ReadAllLines(this.file, encoding);
 		}
 
-		public Byte[] TryReadAllBytes()
+		public byte[] TryReadAllBytes()
 		{
 			if (this.Exists())
 				return this.ReadAllBytes();
@@ -421,110 +421,110 @@ namespace Schlechtums.Core.Common
 				return null;
 		}
 
-		public virtual Byte[] ReadAllBytes()
+		public virtual byte[] ReadAllBytes()
 		{
-			return File.ReadAllBytes(this.m_File);
+			return File.ReadAllBytes(this.file);
 		}
 
-		public void Replace(String destinationFileName, String destinationBackupFileName)
+		public void Replace(string destinationFileName, string destinationBackupFileName)
 		{
-			File.Replace(this.m_File, destinationFileName, destinationBackupFileName);
+			File.Replace(this.file, destinationFileName, destinationBackupFileName);
 		}
 
-		public void Replace(String destinationFileName, String destinationBackupFilename, Boolean ignoreMetadataErrors)
+		public void Replace(string destinationFileName, string destinationBackupFilename, bool ignoreMetadataErrors)
 		{
-			File.Replace(this.m_File, destinationFileName, destinationBackupFilename, ignoreMetadataErrors);
+			File.Replace(this.file, destinationFileName, destinationBackupFilename, ignoreMetadataErrors);
 		}
 
 		public void SetAttributes(FileAttributes fileAttributes)
 		{
-			File.SetAttributes(this.m_File, fileAttributes);
+			File.SetAttributes(this.file, fileAttributes);
 		}
 
 		public void SetCreationTime(DateTime creationTime)
 		{
-			File.SetCreationTime(this.m_File, creationTime);
+			File.SetCreationTime(this.file, creationTime);
 		}
 
 		public void SetCreationTimeUtc(DateTime creationTimeUtc)
 		{
-			File.SetCreationTimeUtc(this.m_File, creationTimeUtc);
+			File.SetCreationTimeUtc(this.file, creationTimeUtc);
 		}
 
 		public void SetLastAccessTime(DateTime lastAccessTime)
 		{
-			File.SetLastAccessTime(this.m_File, lastAccessTime);
+			File.SetLastAccessTime(this.file, lastAccessTime);
 		}
 
 		public void SetLastAccessTimeUtc(DateTime lastAccessTimeUtc)
 		{
-			File.SetLastAccessTimeUtc(this.m_File, lastAccessTimeUtc);
+			File.SetLastAccessTimeUtc(this.file, lastAccessTimeUtc);
 		}
 
 		public void SetLastWriteTime(DateTime lastWriteTime)
 		{
-			File.SetLastWriteTime(this.m_File, lastWriteTime);
+			File.SetLastWriteTime(this.file, lastWriteTime);
 		}
 
 		public void SetLastWriteTimeUtc(DateTime lastWriteTimeUtc)
 		{
-			File.SetLastWriteTimeUtc(this.m_File, lastWriteTimeUtc);
+			File.SetLastWriteTimeUtc(this.file, lastWriteTimeUtc);
 		}
 
-		public virtual void WriteAllText(String contents)
+		public virtual void WriteAllText(string contents)
 		{
-			File.WriteAllText(this.m_File, contents);
+			File.WriteAllText(this.file, contents);
 		}
 
-		public virtual void WriteAllText(String contents, Encoding enc)
+		public virtual void WriteAllText(string contents, Encoding enc)
 		{
-			File.WriteAllText(this.m_File, contents, enc);
+			File.WriteAllText(this.file, contents, enc);
 		}
 
-		public virtual void WriteAllLines(String[] contents)
+		public virtual void WriteAllLines(string[] contents)
 		{
-			File.WriteAllLines(this.m_File, contents);
+			File.WriteAllLines(this.file, contents);
 		}
 
-		public virtual void WriteAllLines(String[] contents, Encoding enc)
+		public virtual void WriteAllLines(string[] contents, Encoding enc)
 		{
-			File.WriteAllLines(this.m_File, contents, enc);
+			File.WriteAllLines(this.file, contents, enc);
 		}
 
-		public virtual void WriteAllBytes(Byte[] bytes)
+		public virtual void WriteAllBytes(byte[] bytes)
 		{
-			File.WriteAllBytes(this.m_File, bytes);
+			File.WriteAllBytes(this.file, bytes);
 		}
 		#endregion
 
-		public static implicit operator String(TemporaryFile tf)
+		public static implicit operator string(TemporaryFile tf)
 		{
 			return tf.ToString();
 		}
 
 		public override string ToString()
 		{
-			return this.m_File;
+			return this.file;
 		}
 
-		public TemporaryFile WithExtension(String extension)
+		public TemporaryFile WithExtension(string extension)
 		{
-			var fSplit = this.m_File.Split(".");
+			var fSplit = this.file.Split(".");
 
-			this.m_File = fSplit.Take(fSplit.Length - 1).Join(".") + extension.EnsureStartsWith(".");
+			this.file = fSplit.Take(fSplit.Length - 1).Join(".") + extension.EnsureStartsWith(".");
 			return this;
 		}
 
-		public Boolean IsLocked()
+		public bool IsLocked()
 		{
-			return new FileInfo(this.m_File).IsLocked();
+			return new FileInfo(this.file).IsLocked();
 		}
 
-		public String Filename
+		public string Filename
 		{
 			get
 			{
-				return Path.GetFileName(this.m_File);
+				return Path.GetFileName(this.file);
 			}
 		}
 	}

@@ -10,12 +10,12 @@ namespace Schlechtums.Core.UnitTest
 
     public class TemporaryFileTest
     {
-        private String _TestText = @"Hello
+        private string _TestText = @"Hello
 World!";
 
-        private String[] _TestLines = new[] { "Hello", "World!" };
+        private string[] _TestLines = new[] { "Hello", "World!" };
 
-        private Byte[] _TestBytes = @"Hello
+        private byte[] _TestBytes = @"Hello
 World!".GetBytes();
 
         private Encoding _TestEncoding = Encoding.ASCII;
@@ -110,7 +110,7 @@ World!".GetBytes();
             }
         }
 
-        private Boolean ByteArraysAreSame(Byte[] left, Byte[] right)
+        private bool ByteArraysAreSame(byte[] left, byte[] right)
         {
             if (left.Length != right.Length)
                 return false;

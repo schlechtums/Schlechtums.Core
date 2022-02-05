@@ -21,7 +21,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="ex">The extension.</param>
         /// <param name="includeStackTrace">true/false to include the stacktrace or not.</param>
         /// <returns>The messages.</returns>
-        public static IEnumerable<String> GetExceptionMessages(this Exception ex, Boolean includeStackTrace = false)
+        public static IEnumerable<string> GetExceptionMessages(this Exception ex, bool includeStackTrace = false)
         {
             while (ex != null)
             {
@@ -49,7 +49,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="ex">The extension.</param>
         /// <param name="includeStackTrace">true/false to include the stacktrace or not.</param>
         /// <returns>The messages delimited by newlines.</returns>
-        public static String GetExceptionMessagesAsString(this Exception ex, Boolean includeStackTrace = false)
+        public static string GetExceptionMessagesAsString(this Exception ex, bool includeStackTrace = false)
         {
             return ex.GetExceptionMessagesAsString(Environment.NewLine + Environment.NewLine, includeStackTrace);
         }
@@ -61,7 +61,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="delimiter">The message delimter.</param>
         /// <param name="includeStackTrace">true/false to include the stacktrace or not.</param>
         /// <returns>The messages delimited by newlines.</returns>
-        public static String GetExceptionMessagesAsString(this Exception ex, String delimiter, Boolean includeStackTrace = false)
+        public static string GetExceptionMessagesAsString(this Exception ex, string delimiter, bool includeStackTrace = false)
         {
             return ex.GetExceptionMessages(includeStackTrace).Distinct().Join(delimiter);
         }

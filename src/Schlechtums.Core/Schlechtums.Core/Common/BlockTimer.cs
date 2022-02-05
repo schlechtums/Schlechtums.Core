@@ -10,7 +10,7 @@ namespace Schlechtums.Core.Common
     /// </summary>
     public class BlockTimer : IDisposable
     {
-        public BlockTimer(String name, ILogger logger)
+        public BlockTimer(string name, ILogger logger)
         {
             this.Name = name;
             this._Logger = logger;
@@ -18,14 +18,14 @@ namespace Schlechtums.Core.Common
             this._Timer.Start();
         }
 
-        public String Name { get; private set; }
+        public string Name { get; private set; }
         public TimeSpan Elapsed { get { return this._Timer.Elapsed; } }
 
         private Stopwatch _Timer;
         private ILogger _Logger;
-        private Boolean disposedValue;
+        private bool disposedValue;
 
-        protected virtual void Dispose(Boolean disposing)
+        protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
             {

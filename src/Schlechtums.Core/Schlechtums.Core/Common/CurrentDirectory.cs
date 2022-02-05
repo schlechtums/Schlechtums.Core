@@ -13,29 +13,29 @@ namespace Schlechtums.Core.Common
             : this(dir.FullName)
         { }
 
-        public CurrentDirectory(String dir)
+        public CurrentDirectory(string dir)
         {
             if (!dir.IsNullOrWhitespace())
                 dir = Path.GetFullPath(dir);
 
-            this.m_OriginalDirectory = Directory.GetCurrentDirectory();
-            this.m_ThisDirectory = dir;
+            this.originalDirectory = Directory.GetCurrentDirectory();
+            this.thisDirectory = dir;
 
-            if (!this.m_ThisDirectory.IsNullOrWhitespace())
-                Directory.SetCurrentDirectory(this.m_ThisDirectory);
+            if (!this.thisDirectory.IsNullOrWhitespace())
+                Directory.SetCurrentDirectory(this.thisDirectory);
         }
 
-        private String m_OriginalDirectory;
-        private String m_ThisDirectory;
+        private string originalDirectory;
+        private string thisDirectory;
 
         public void Dispose()
         {
-            Directory.SetCurrentDirectory(this.m_OriginalDirectory);
+            Directory.SetCurrentDirectory(this.originalDirectory);
         }
 
-        public static implicit operator String(CurrentDirectory cd)
+        public static implicit operator string(CurrentDirectory cd)
         {
-            return cd.m_ThisDirectory;
+            return cd.thisDirectory;
         }
     }
 

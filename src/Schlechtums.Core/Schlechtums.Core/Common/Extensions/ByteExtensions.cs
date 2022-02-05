@@ -11,7 +11,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// </summary>
         /// <param name="bytes"></param>
         /// <returns>The string.</returns>
-        public static String GetString(this Byte[] bytes)
+        public static string GetString(this byte[] bytes)
         {
             return bytes.GetString(Encoding.UTF8);
         }
@@ -20,7 +20,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// </summary>
         /// <param name="bytes"></param>
         /// <returns>The string.</returns>
-        public static String GetStringSafe(this Byte[] bytes)
+        public static string GetStringSafe(this byte[] bytes)
         {
             return bytes.GetStringSafe(Encoding.UTF8);
         }
@@ -31,7 +31,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="bytes"></param>
         /// <param name="enc">The encoding.</param>
         /// <returns>The string.</returns>
-        public static String GetString(this Byte[] bytes, Encoding enc)
+        public static string GetString(this byte[] bytes, Encoding enc)
         {
             return enc.GetString(bytes);
         }
@@ -42,7 +42,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="bytes"></param>
         /// <param name="enc">The encoding.</param>
         /// <returns>The string.</returns>
-        public static String GetStringSafe(this Byte[] bytes, Encoding enc)
+        public static string GetStringSafe(this byte[] bytes, Encoding enc)
         {
             if (bytes == null)
                 return null;

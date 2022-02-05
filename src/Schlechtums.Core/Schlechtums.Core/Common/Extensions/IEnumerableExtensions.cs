@@ -7,25 +7,25 @@ namespace Schlechtums.Core.Common.Extensions
     public static class IEnumerableExtensions
     {
         /// <summary>
-        /// Wrapper for String.Join so it can be called directly off of en enumeration of objects.
+        /// Wrapper for string.join so it can be called directly off of en enumeration of objects.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="objects"></param>
         /// <param name="delimiter">The delimiter with which to join the string.</param>
         /// <returns>The objects joined with the delimiter.</returns>
-        public static String Join<T>(this IEnumerable<T> objects, String delimiter)
+        public static string Join<T>(this IEnumerable<T> objects, string delimiter)
         {
-            return String.Join(delimiter, objects);
+            return string.Join(delimiter, objects);
         }
 
         /// <summary>
-        /// Wrapper for String.Join so it can be called directly off of en enumeration of objects.  Returns null if the enumeration is null.
+        /// Wrapper for string.join so it can be called directly off of en enumeration of objects.  Returns null if the enumeration is null.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="objects"></param>
         /// <param name="delimiter">The delimiter with which to join the string.</param>
         /// <returns>The objects joined with the delimiter or null if the enumeration is null.</returns>
-        public static String JoinSafe<T>(this IEnumerable<T> objects, String delimiter)
+        public static string JoinSafe<T>(this IEnumerable<T> objects, string delimiter)
         {
             if (objects == null)
                 return null;
@@ -40,7 +40,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="source"></param>
         /// <param name="func"></param>
         /// <returns>True if no elements match the condition.</returns>
-        public static Boolean None<T>(this IEnumerable<T> source, Func<T, Boolean> func)
+        public static bool None<T>(this IEnumerable<T> source, Func<T, bool> func)
         {
             return source.All(s => !func(s));
         }
@@ -51,7 +51,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <typeparam name="T"></typeparam>
         /// <param name="source"></param>
         /// <returns>True if there are no elements, false otherwise.</returns>
-        public static Boolean None<T>(this IEnumerable<T> source)
+        public static bool None<T>(this IEnumerable<T> source)
         {
             return !source.Any();
         }
@@ -63,7 +63,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="source"></param>
         /// <param name="func"></param>
         /// <returns>True if no elements match the condition or the IEnumerable is null.</returns>
-        public static Boolean NoneSafe<T>(this IEnumerable<T> source, Func<T, Boolean> func)
+        public static bool NoneSafe<T>(this IEnumerable<T> source, Func<T, bool> func)
         {
             if (source == null)
                 return true;
@@ -77,7 +77,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <typeparam name="T"></typeparam>
         /// <param name="source"></param>
         /// <returns>True if there are no elements or the IEnumerable is null.</returns>
-        public static Boolean NoneSafe<T>(this IEnumerable<T> source)
+        public static bool NoneSafe<T>(this IEnumerable<T> source)
         {
             return !source.AnySafe();
         }
@@ -88,7 +88,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <typeparam name="T"></typeparam>
         /// <param name="source"></param>
         /// <returns></returns>
-        public static Boolean AnySafe<T>(this IEnumerable<T> source)
+        public static bool AnySafe<T>(this IEnumerable<T> source)
         {
             if (source == null)
                 return false;
@@ -103,7 +103,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="source"></param>
         /// <param name="selector"></param>
         /// <returns></returns>
-        public static Boolean AnySafe<T>(this IEnumerable<T> source, Func<T, Boolean> selector)
+        public static bool AnySafe<T>(this IEnumerable<T> source, Func<T, bool> selector)
         {
             if (source == null)
                 return false;
@@ -112,25 +112,25 @@ namespace Schlechtums.Core.Common.Extensions
         }
 
         /// <summary>
-        /// Returns if a collection has any matching elements based on a selector with a nullable Boolean return.
+        /// Returns if a collection has any matching elements based on a selector with a nullable bool return.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="source"></param>
         /// <param name="selector"></param>
         /// <returns></returns>
-        public static Boolean Any<T>(this IEnumerable<T> source, Func<T, Boolean?> selector)
+        public static bool Any<T>(this IEnumerable<T> source, Func<T, bool?> selector)
         {
             return System.Linq.Enumerable.Any<T>(source, s => selector(s) == true);
         }
 
         /// <summary>
-        /// Returns if a collection has any matching elements based on a selector with a nullable Boolean return.  If the source is null, returns false.
+        /// Returns if a collection has any matching elements based on a selector with a nullable bool return.  If the source is null, returns false.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="source"></param>
         /// <param name="selector"></param>
         /// <returns></returns>
-        public static Boolean AnySafe<T>(this IEnumerable<T> source, Func<T, Boolean?> selector)
+        public static bool AnySafe<T>(this IEnumerable<T> source, Func<T, bool?> selector)
         {
             if (source == null)
                 return false;
@@ -161,7 +161,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="source"></param>
         /// <param name="selector"></param>
         /// <returns></returns>
-        public static IEnumerable<T> WhereSafe<T>(this IEnumerable<T> source, Func<T, Boolean> selector)
+        public static IEnumerable<T> WhereSafe<T>(this IEnumerable<T> source, Func<T, bool> selector)
         {
             if (source == null)
                 return new List<T>();
@@ -170,25 +170,25 @@ namespace Schlechtums.Core.Common.Extensions
         }
 
         /// <summary>
-        /// Returns a filtered collection of elements based on a where selector with a nullable Boolean return.
+        /// Returns a filtered collection of elements based on a where selector with a nullable bool return.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="source"></param>
         /// <param name="selector"></param>
         /// <returns></returns>
-        public static IEnumerable<T> Where<T>(this IEnumerable<T> source, Func<T, Boolean?> selector)
+        public static IEnumerable<T> Where<T>(this IEnumerable<T> source, Func<T, bool?> selector)
         {
             return System.Linq.Enumerable.Where<T>(source, s => selector(s) == true);
         }
 
         /// <summary>
-        /// Returns a filtered collection of elements based on a where selector with a nullable Boolean return.    If the source is null, returns a new List&lt;T&gt;.
+        /// Returns a filtered collection of elements based on a where selector with a nullable bool return.    If the source is null, returns a new List&lt;T&gt;.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="source"></param>
         /// <param name="selector"></param>
         /// <returns></returns>
-        public static IEnumerable<T> WhereSafe<T>(this IEnumerable<T> source, Func<T, Boolean?> selector)
+        public static IEnumerable<T> WhereSafe<T>(this IEnumerable<T> source, Func<T, bool?> selector)
         {
             if (source == null)
                 return new List<T>();
@@ -244,7 +244,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="obj"></param>
         /// <param name="set"></param>
         /// <returns>True/False</returns>
-        public static Boolean InSafe<T>(this T obj, params T[] set)
+        public static bool InSafe<T>(this T obj, params T[] set)
         {
             if (set == null)
                 return false;
@@ -259,7 +259,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="obj"></param>
         /// <param name="set"></param>
         /// <returns>True/False</returns>
-        public static Boolean In<T>(this T obj, params T[] set)
+        public static bool In<T>(this T obj, params T[] set)
         {
             return set.Contains(obj);
         }
@@ -271,7 +271,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="obj"></param>
         /// <param name="set"></param>
         /// <returns>True/False</returns>
-        public static Boolean InSafe<T>(this T obj, HashSet<T> set)
+        public static bool InSafe<T>(this T obj, HashSet<T> set)
         {
             if (set == null)
                 return false;
@@ -286,7 +286,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="obj"></param>
         /// <param name="set"></param>
         /// <returns>True/False</returns>
-        public static Boolean In<T>(this T obj, HashSet<T> set)
+        public static bool In<T>(this T obj, HashSet<T> set)
         {
             return set.Contains(obj);
         }
@@ -298,7 +298,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="obj"></param>
         /// <param name="set"></param>
         /// <returns>True/False</returns>
-        public static Boolean InSafe<T>(this T obj, List<T> set)
+        public static bool InSafe<T>(this T obj, List<T> set)
         {
             if (set == null)
                 return false;
@@ -313,7 +313,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="obj"></param>
         /// <param name="set"></param>
         /// <returns>True/False</returns>
-        public static Boolean In<T>(this T obj, List<T> set)
+        public static bool In<T>(this T obj, List<T> set)
         {
             return set.Contains(obj);
         }
@@ -364,19 +364,19 @@ namespace Schlechtums.Core.Common.Extensions
             return ret;
         }
 
-        public static Dictionary<String, String> ToDictionarySafe(this IEnumerable<String[]> source, Func<String[], String> keySelector, Func<String[], String> elementSelector, String separator)
+        public static Dictionary<string, string> ToDictionarySafe(this IEnumerable<string[]> source, Func<string[], string> keySelector, Func<string[], string> elementSelector, string separator)
         {
             if (source == null)
                 return null;
 
-            var ret = new Dictionary<String, String>();
+            var ret = new Dictionary<string, string>();
 
             foreach (var s in source)
             {
                 var key = keySelector(s);
                 if (ret.ContainsKey(key))
                 {
-                    ret[key] += String.Format("{0}{1}", separator, elementSelector(s));
+                    ret[key] += string.Format("{0}{1}", separator, elementSelector(s));
                 }
                 else
                 {
@@ -407,7 +407,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="source"></param>
         /// <param name="selector"></param>
         /// <returns></returns>
-        public static int CountSafe<T>(this IEnumerable<T> source, Func<T, Boolean> selector)
+        public static int CountSafe<T>(this IEnumerable<T> source, Func<T, bool> selector)
         {
             if (source == null)
                 return 0;
@@ -430,13 +430,13 @@ namespace Schlechtums.Core.Common.Extensions
         }
 
         /// <summary>
-        /// Returns the number of items of a collection that match a selector with a nullable Boolean return.
+        /// Returns the number of items of a collection that match a selector with a nullable bool return.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="source"></param>
         /// <param name="selector"></param>
         /// <returns></returns>
-        public static int Count<T>(this IEnumerable<T> source, Func<T, Boolean?> selector)
+        public static int Count<T>(this IEnumerable<T> source, Func<T, bool?> selector)
         {
             return System.Linq.Enumerable.Count<T>(source, s => selector(s) == true);
         }

@@ -17,7 +17,7 @@ namespace Schlechtums.Core.Common.Extensions
             AllMdl = 0x20
         }
 
-        internal static Dictionary<FileExtensionFilterType, FileExtensionFilterTypeDescriptor> s_ExtensionDescriptions = new Dictionary<FileExtensionFilterType, FileExtensionFilterTypeDescriptor>
+        internal static Dictionary<FileExtensionFilterType, FileExtensionFilterTypeDescriptor> extensionDescriptions = new Dictionary<FileExtensionFilterType, FileExtensionFilterTypeDescriptor>
         {
             { FileExtensionFilterType.All, new FileExtensionFilterTypeDescriptor("All Files", "*.*") },
             { FileExtensionFilterType.Csv, new FileExtensionFilterTypeDescriptor("Comma Delimited Files", "*.csv") },
@@ -26,35 +26,35 @@ namespace Schlechtums.Core.Common.Extensions
             { FileExtensionFilterType.Html, new FileExtensionFilterTypeDescriptor("Html Files", "*.htm; *.html") }
         };
 
-        public static String ToFilterString(this FileExtensionFilterType feft)
+        public static string ToFilterString(this FileExtensionFilterType feft)
         {
-            var types = new List<String>();
+            var types = new List<string>();
             foreach (var feftt in (Enum.GetValues(typeof(FileExtensionFilterType)) as FileExtensionFilterType[]).OrderBy(v =>
             {
                 if (v == FileExtensionFilterType.All)
                     return int.MaxValue;
-                else if (v.ToString().Count(c => Char.IsUpper(c)) > 1)
+                else if (v.ToString().Count(c => char.IsUpper(c)) > 1)
                     return 0;
                 else
                     return 1;
             }))
             {
                 if ((feft & feftt) == feftt)
-                    types.Add(String.Format("{0} ({1})|{2}", FileExtensionFilter.s_ExtensionDescriptions[feftt].Description, FileExtensionFilter.s_ExtensionDescriptions[feftt].Extension.Replace(";", ", "), FileExtensionFilter.s_ExtensionDescriptions[feftt].Extension));
+                    types.Add(string.Format("{0} ({1})|{2}", FileExtensionFilter.extensionDescriptions[feftt].Description, FileExtensionFilter.extensionDescriptions[feftt].Extension.Replace(";", ", "), FileExtensionFilter.extensionDescriptions[feftt].Extension));
             }
             return types.Join("|");
         }
 
         internal class FileExtensionFilterTypeDescriptor
         {
-            internal FileExtensionFilterTypeDescriptor(String description, String extension)
+            internal FileExtensionFilterTypeDescriptor(string description, string extension)
             {
                 this.Description = description;
                 this.Extension = extension;
             }
 
-            public String Description { get; set; }
-            public String Extension { get; set; }
+            public string Description { get; set; }
+            public string Extension { get; set; }
         }
     }
 }

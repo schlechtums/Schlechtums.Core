@@ -23,7 +23,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="pluralForm">The plural form.  Ex. Computer: s (ToPlural("s"), Entry: ies (ToPlural("ies")</param>
         /// <param name="baseForm">The base ending.  Ex. Computer: (empty string) (ToPlural("s", ["" or omit]), Entry: y. (ToPlural("ies", "y").</param>
         /// <returns>The word ending.  Ex. if the word is entry/entries, then the string being pluralized should only be "entr", and it will get an ending of either "y" or "ies".</returns>
-        public static String ToPlural<T>(this IEnumerable<T> source, String pluralForm = "s", String baseForm = "")
+        public static string ToPlural<T>(this IEnumerable<T> source, string pluralForm = "s", string baseForm = "")
         {
             //short circuit the count since we only need to know if it's 1 or something else to determine if it's plural or not
             int count = 0;
@@ -49,7 +49,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="pluralForm">The plural form.  Ex. Computer: s (ToPlural("s"), Entry: ies (ToPlural("ies")</param>
         /// <param name="baseForm">The base ending.  Ex. Computer: (empty string) (ToPlural("s", ["" or omit]), Entry: y. (ToPlural("ies", "y").</param>
         /// <returns>The word pluralized.  Ex. if the word is entry/entries, then the string being pluralized should only be "entr", and it will get an ending of either "y" or "ies".</returns>
-        public static String ToPlural<T>(this IEnumerable<T> source, String word, String pluralForm = "s", String baseForm = "")
+        public static string ToPlural<T>(this IEnumerable<T> source, string word, string pluralForm = "s", string baseForm = "")
         {
             return word + source.ToPlural(pluralForm, baseForm);
         }
@@ -61,7 +61,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="ending">The desired ending.</param>
         /// <param name="caseSensitive">True/False for a case sensitive comparison.</param>
         /// <returns>The string which definitely ends with the given character.</returns>
-        public static String EnsureEndsWith(this String str, Char ending, Boolean caseSensitive = true)
+        public static string EnsureEndsWith(this string str, char ending, bool caseSensitive = true)
         {
             return str.EnsureEndsWith(ending.ToString(), caseSensitive);
         }
@@ -73,7 +73,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="ending">The desired ending.</param>
         /// <param name="caseSensitive">True/False for a case sensitive comparison.</param>
         /// <returns>The string which definitely ends with the given string.</returns>
-        public static String EnsureEndsWith(this String str, String ending, Boolean caseSensitive = true)
+        public static string EnsureEndsWith(this string str, string ending, bool caseSensitive = true)
         {
             if (str == null)
                 return ending;
@@ -99,7 +99,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="ending">The undesired ending.</param>
         /// <param name="caseSensitive">True/False for a case sensitive comparison.</param>
         /// <returns>The string which definitely does not end with the given character.</returns>
-        public static String EnsureDoesNotEndWith(this String str, Char ending, Boolean caseSensitive = true)
+        public static string EnsureDoesNotEndWith(this string str, char ending, bool caseSensitive = true)
         {
             return str.EnsureDoesNotEndWith(ending.ToString(), caseSensitive);
         }
@@ -111,7 +111,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="ending">The undesired ending.</param>
         /// <param name="caseSensitive">True/False for a case sensitive comparison.</param>
         /// <returns>The string which definitely does not end with the given string.</returns>
-        public static String EnsureDoesNotEndWith(this String str, String ending, Boolean caseSensitive = true)
+        public static string EnsureDoesNotEndWith(this string str, string ending, bool caseSensitive = true)
         {
             if (str == null)
                 return str;
@@ -137,7 +137,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="start">The desired start.</param>
         /// <param name="caseSensitive">True/False for a case sensitive comparison.</param>
         /// <returns>The string which definitely starts with the given character.</returns>
-        public static String EnsureStartsWith(this String str, Char start, Boolean caseSensitive = true)
+        public static string EnsureStartsWith(this string str, char start, bool caseSensitive = true)
         {
             return str.EnsureStartsWith(start.ToString(), caseSensitive);
         }
@@ -149,7 +149,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="start">The desired start.</param>
         /// <param name="caseSensitive">True/False for a case sensitive comparison.</param>
         /// <returns>The string which definitely starts with the given string.</returns>
-        public static String EnsureStartsWith(this String str, String start, Boolean caseSensitive = true)
+        public static string EnsureStartsWith(this string str, string start, bool caseSensitive = true)
         {
             if (str == null)
                 return start;
@@ -175,7 +175,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="start">The undesired character.</param>
         /// <param name="caseSensitive">True/False for a case sensitive comparison.</param>
         /// <returns>The string which definitely does not start with the given character.</returns>
-        public static String EnsureDoesNotStartWith(this String str, Char start, Boolean caseSensitive = true)
+        public static string EnsureDoesNotStartWith(this string str, char start, bool caseSensitive = true)
         {
             return str.EnsureDoesNotStartWith(start.ToString(), caseSensitive);
         }
@@ -187,7 +187,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="start">The undesired string.</param>
         /// <param name="caseSensitive">True/False for a case sensitive comparison.</param>
         /// <returns>The string which definitely does not start with the given string.</returns>
-        public static String EnsureDoesNotStartWith(this String str, String start, Boolean caseSensitive = true)
+        public static string EnsureDoesNotStartWith(this string str, string start, bool caseSensitive = true)
         {
             if (str == null)
                 return null;
@@ -212,7 +212,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="strings"></param>
         /// <param name="num">The number of newlines to use as the separator</param>
         /// <returns>The separated string</returns>
-        public static String JoinWithNewline(this IEnumerable<String> strings, int num = 1)
+        public static string JoinWithNewline(this IEnumerable<string> strings, int num = 1)
         {
             return strings.Join(Environment.NewLine.CreateList(num).Join(""));
         }
@@ -223,7 +223,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="strings"></param>
         /// <param name="num">The number of newlines to use as the separator</param>
         /// <returns>The separated string</returns>
-        public static String JoinWithNewlineSafe(this IEnumerable<String> strings, int num = 1)
+        public static string JoinWithNewlineSafe(this IEnumerable<string> strings, int num = 1)
         {
             if (strings == null)
                 return null;
@@ -236,9 +236,9 @@ namespace Schlechtums.Core.Common.Extensions
         /// </summary>
         /// <param name="str"></param>
         /// <returns>True/False</returns>
-        public static Boolean IsNullOrWhitespace(this String str)
+        public static bool IsNullOrWhitespace(this string str)
         {
-            return String.IsNullOrWhiteSpace(str);
+            return string.IsNullOrWhiteSpace(str);
         }
 
         /// <summary>
@@ -247,7 +247,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="str">The string to test if null or whitespace.</param>
         /// <param name="ifNull">The string to return if null.</param>
         /// <returns>Either str, or ifNull if str.IsNullOrWhitespace()</returns>
-        public static String IsNullOrWhitespace(this String str, String ifNullOrWhitespace)
+        public static string IsNullOrWhitespace(this string str, string ifNullOrWhitespace)
         {
             if (str.IsNullOrWhitespace())
                 return ifNullOrWhitespace;
@@ -260,7 +260,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// </summary>
         /// <param name="str">The string</param>
         /// <returns>True/False</returns>
-        public static Boolean IsValued(this String str)
+        public static bool IsValued(this string str)
         {
             return !str.IsNullOrWhitespace();
         }
@@ -268,7 +268,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <summary>
         /// Shortcut method to create an XElement from a string of xml
         /// </summary>
-        /// <param name="xml">String containing XML to parse.</param>
+        /// <param name="xml">string containing XML to parse.</param>
         /// <returns>An XElement for this XML.</returns>
         public static XElement ToXElement(this string xml)
         {
@@ -281,9 +281,9 @@ namespace Schlechtums.Core.Common.Extensions
         /// <summary>
         /// Shortcut method to create an XElement from a string of xml, but safely returning null if the string is null or whitespace
         /// </summary>
-        /// <param name="xml">String containing XML to parse.</param>
+        /// <param name="xml">string containing XML to parse.</param>
         /// <returns>An XElement for this XML or null</returns>
-        public static XElement ToXElementSafe(this String xml)
+        public static XElement ToXElementSafe(this string xml)
         {
             if (xml.IsNullOrWhitespace())
                 return null;
@@ -305,7 +305,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// </summary>
         /// <param name="str"></param>
         /// <returns>The byte array.</returns>
-        public static Byte[] GetBytes(this String str)
+        public static byte[] GetBytes(this string str)
         {
             return str.GetBytes(Encoding.UTF8);
         }
@@ -315,7 +315,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// </summary>
         /// <param name="str"></param>
         /// <returns>The byte array.</returns>
-        public static Byte[] GetBytesSafe(this String str)
+        public static byte[] GetBytesSafe(this string str)
         {
             return str.GetBytesSafe(Encoding.UTF8);
         }
@@ -326,7 +326,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="str"></param>
         /// <param name="enc">The encoding.</param>
         /// <returns>The byte array.</returns>
-        public static Byte[] GetBytes(this String str, Encoding enc)
+        public static byte[] GetBytes(this string str, Encoding enc)
         {
             return enc.GetBytes(str);
         }
@@ -337,7 +337,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="str"></param>
         /// <param name="enc">The encoding.</param>
         /// <returns>The byte array.</returns>
-        public static Byte[] GetBytesSafe(this String str, Encoding enc)
+        public static byte[] GetBytesSafe(this string str, Encoding enc)
         {
             if (str == null)
                 return null;
@@ -350,7 +350,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// </summary>
         /// <param name="str"></param>
         /// <returns>The short.</returns>
-        public static short ToShort(this String str)
+        public static short ToShort(this string str)
         {
             short.TryParse(str, out short num);
             return num;
@@ -361,7 +361,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// </summary>
         /// <param name="str"></param>
         /// <returns>The nullable short.</returns>
-        public static short? ToNullableShort(this String str)
+        public static short? ToNullableShort(this string str)
         {
             if (str.IsNullOrWhitespace())
                 return null;
@@ -374,7 +374,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// </summary>
         /// <param name="str"></param>
         /// <returns>The int.</returns>
-        public static int ToInt(this String str)
+        public static int ToInt(this string str)
         {
             int.TryParse(str, out int num);
             return num;
@@ -385,7 +385,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// </summary>
         /// <param name="str"></param>
         /// <returns>The nullable int.</returns>
-        public static int? ToNullableInt(this String str)
+        public static int? ToNullableInt(this string str)
         {
             if (str.IsNullOrWhitespace())
                 return null;
@@ -398,7 +398,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// </summary>
         /// <param name="str"></param>
         /// <returns>The DateTime.</returns>
-        public static DateTime ToDateTime(this String str)
+        public static DateTime ToDateTime(this string str)
         {
             return DateTime.Parse(str);
         }
@@ -409,7 +409,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="str"></param>
         /// <param name="format">The format.</param>
         /// <returns>The DateTime.</returns>
-        public static DateTime ToDateTime(this String str, String format)
+        public static DateTime ToDateTime(this string str, string format)
         {
             return str.ToDateTime(format, null);
         }
@@ -421,12 +421,12 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="format">The format.</param>
         /// <param name="formatProvider">The format provider.</param>
         /// <returns>The DateTime.</returns>
-        public static DateTime ToDateTime(this String str, String format, IFormatProvider formatProvider)
+        public static DateTime ToDateTime(this string str, string format, IFormatProvider formatProvider)
         {
             return DateTime.ParseExact(str, format, formatProvider);
         }
 
-        public static DateTime ToUniversalDateTime(this String str)
+        public static DateTime ToUniversalDateTime(this string str)
         {
             return str.ToDateTime().ToUniversalTime();
         }
@@ -437,7 +437,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="str"></param>
         /// <param name="format">The format.</param>
         /// <returns>The DateTime.</returns>
-        public static DateTime ToUniversalDateTime(this String str, String format)
+        public static DateTime ToUniversalDateTime(this string str, string format)
         {
             return str.ToDateTime(format, null).ToUniversalTime();
         }
@@ -449,7 +449,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="format">The format.</param>
         /// <param name="formatProvider">The format provider.</param>
         /// <returns>The DateTime.</returns>
-        public static DateTime ToUniversalDateTime(this String str, String format, IFormatProvider formatProvider)
+        public static DateTime ToUniversalDateTime(this string str, string format, IFormatProvider formatProvider)
         {
             return str.ToDateTime(format, formatProvider).ToUniversalTime();
         }
@@ -459,7 +459,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// </summary>
         /// <param name="str"></param>
         /// <returns></returns>
-        public static DateTime ToDateTimeIgnoreOffset(this String str)
+        public static DateTime ToDateTimeIgnoreOffset(this string str)
         {
             return str.ToDateTimeIgnoreOffset(null);
         }
@@ -470,7 +470,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="str"></param>
         ///<param name="formatProvider"></param>
         /// <returns>The DateTime.</returns>
-        public static DateTime ToDateTimeIgnoreOffset(this String str, IFormatProvider formatProvider)
+        public static DateTime ToDateTimeIgnoreOffset(this string str, IFormatProvider formatProvider)
         {
             return str.ToDateTimeIgnoreOffset(formatProvider, DateTimeStyles.None);
         }
@@ -482,7 +482,7 @@ namespace Schlechtums.Core.Common.Extensions
         ///<param name="formatProvider"></param>
         ///<param name="styles"></param>
         /// <returns>The DateTime.</returns>
-        public static DateTime ToDateTimeIgnoreOffset(this String str, IFormatProvider formatProvider, DateTimeStyles styles)
+        public static DateTime ToDateTimeIgnoreOffset(this string str, IFormatProvider formatProvider, DateTimeStyles styles)
         {
             return DateTimeOffset.Parse(str, formatProvider, styles).DateTime;
         }
@@ -492,7 +492,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// </summary>
         /// <param name="str"></param>
         /// <returns></returns>
-        public static DateTime? ToNullableDateTimeIgnoreOffset(this String str)
+        public static DateTime? ToNullableDateTimeIgnoreOffset(this string str)
         {
             if (str.IsNullOrWhitespace())
                 return null;
@@ -506,7 +506,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="str"></param>
         ///<param name="formatProvider"></param>
         /// <returns>The DateTime.</returns>
-        public static DateTime? ToNullableDateTimeIgnoreOffset(this String str, IFormatProvider formatProvider)
+        public static DateTime? ToNullableDateTimeIgnoreOffset(this string str, IFormatProvider formatProvider)
         {
             if (str.IsNullOrWhitespace())
                 return null;
@@ -521,7 +521,7 @@ namespace Schlechtums.Core.Common.Extensions
         ///<param name="formatProvider"></param>
         ///<param name="styles"></param>
         /// <returns>The DateTime.</returns>
-        public static DateTime? ToNullableDateTimeIgnoreOffset(this String str, IFormatProvider formatProvider, DateTimeStyles styles)
+        public static DateTime? ToNullableDateTimeIgnoreOffset(this string str, IFormatProvider formatProvider, DateTimeStyles styles)
         {
             if (str.IsNullOrWhitespace())
                 return null;
@@ -534,7 +534,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// </summary>
         /// <param name="str"></param>
         /// <returns>The nullable DateTime.</returns>
-        public static DateTime? ToNullableDateTime(this String str)
+        public static DateTime? ToNullableDateTime(this string str)
         {
             if (str.IsNullOrWhitespace())
                 return null;
@@ -547,7 +547,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// </summary>
         /// <param name="str"></param>
         /// <returns>The nullable DateTime.</returns>
-        public static DateTime? ToNullableUniversalDateTime(this String str)
+        public static DateTime? ToNullableUniversalDateTime(this string str)
         {
             if (str.IsNullOrWhitespace())
                 return null;
@@ -561,7 +561,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="str"></param>
         /// <param name="format">The format.</param>
         /// <returns>The nullable DateTime.</returns>
-        public static DateTime? ToNullableDateTime(this String str, String format)
+        public static DateTime? ToNullableDateTime(this string str, string format)
         {
             return str.ToNullableDateTime(format, null);
         }
@@ -573,7 +573,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="format">The format.</param>
         /// <param name="formatProvider">The format provider.</param>
         /// <returns>The nullable DateTime.</returns>
-        public static DateTime? ToNullableDateTime(this String str, String format, IFormatProvider formatProvider)
+        public static DateTime? ToNullableDateTime(this string str, string format, IFormatProvider formatProvider)
         {
             if (str.IsNullOrWhitespace())
                 return null;
@@ -587,7 +587,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="str"></param>
         /// <param name="format">The format.</param>
         /// <returns>The nullable DateTime.</returns>
-        public static DateTime? ToNullableUniversalDateTime(this String str, String format)
+        public static DateTime? ToNullableUniversalDateTime(this string str, string format)
         {
             return str.ToNullableUniversalDateTime(format, null);
         }
@@ -599,7 +599,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="format">The format.</param>
         /// <param name="formatProvider">The format provider.</param>
         /// <returns>The nullable DateTime.</returns>
-        public static DateTime? ToNullableUniversalDateTime(this String str, String format, IFormatProvider formatProvider)
+        public static DateTime? ToNullableUniversalDateTime(this string str, string format, IFormatProvider formatProvider)
         {
             if (str.IsNullOrWhitespace())
                 return null;
@@ -612,9 +612,9 @@ namespace Schlechtums.Core.Common.Extensions
         /// </summary>
         /// <param name="str"></param>
         /// <returns>The boolean.</returns>
-        public static Boolean ToBoolean(this String str)
+        public static bool ToBoolean(this string str)
         {
-            Boolean.TryParse(str, out Boolean ret);
+            bool.TryParse(str, out bool ret);
             return ret;
         }
 
@@ -623,7 +623,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// </summary>
         /// <param name="str"></param>
         /// <returns>The nullable boolean.</returns>
-        public static Boolean? ToNullableBoolean(this String str)
+        public static bool? ToNullableBoolean(this string str)
         {
             if (str.IsNullOrWhitespace())
                 return null;
@@ -636,7 +636,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// </summary>
         /// <param name="str"></param>
         /// <returns>The long.</returns>
-        public static long ToLong(this String str)
+        public static long ToLong(this string str)
         {
             long.TryParse(str, out long num);
             return num;
@@ -647,7 +647,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// </summary>
         /// <param name="str"></param>
         /// <returns>The nullable long.</returns>
-        public static long? ToNullableLong(this String str)
+        public static long? ToNullableLong(this string str)
         {
             if (str.IsNullOrWhitespace())
                 return null;
@@ -660,9 +660,9 @@ namespace Schlechtums.Core.Common.Extensions
         /// </summary>
         /// <param name="str"></param>
         /// <returns>True/False</returns>
-        public static Boolean IsShort(this String str)
+        public static bool IsShort(this string str)
         {
-            return short.TryParse(str, out short num);
+            return short.TryParse(str, out short _);
         }
 
         /// <summary>
@@ -670,9 +670,9 @@ namespace Schlechtums.Core.Common.Extensions
         /// </summary>
         /// <param name="str"></param>
         /// <returns>True/False</returns>
-        public static Boolean IsInt(this String str)
+        public static bool IsInt(this string str)
         {
-            return int.TryParse(str, out int num);
+            return int.TryParse(str, out int _);
         }
 
         /// <summary>
@@ -680,9 +680,9 @@ namespace Schlechtums.Core.Common.Extensions
         /// </summary>
         /// <param name="str"></param>
         /// <returns>True/False</returns>
-        public static Boolean IsSingle(this String str)
+        public static bool IsSingle(this string str)
         {
-            return float.TryParse(str, out float num);
+            return float.TryParse(str, out float _);
         }
 
         /// <summary>
@@ -690,9 +690,9 @@ namespace Schlechtums.Core.Common.Extensions
         /// </summary>
         /// <param name="str"></param>
         /// <returns>True/False</returns>
-        public static Boolean IsDouble(this String str)
+        public static bool IsDouble(this string str)
         {
-            return double.TryParse(str, out double num);
+            return double.TryParse(str, out double _);
         }
 
         /// <summary>
@@ -700,9 +700,9 @@ namespace Schlechtums.Core.Common.Extensions
         /// </summary>
         /// <param name="str"></param>
         /// <returns>True/False</returns>
-        public static Boolean IsByte(this String str)
+        public static bool IsByte(this string str)
         {
-            return Byte.TryParse(str, out Byte b);
+            return byte.TryParse(str, out byte _);
         }
 
         /// <summary>
@@ -710,9 +710,9 @@ namespace Schlechtums.Core.Common.Extensions
         /// </summary>
         /// <param name="str"></param>
         /// <returns>True/False</returns>
-        public static Boolean IsSByte(this String str)
+        public static bool IsSByte(this string str)
         {
-            return SByte.TryParse(str, out SByte b);
+            return sbyte.TryParse(str, out sbyte _);
         }
 
         /// <summary>
@@ -720,9 +720,9 @@ namespace Schlechtums.Core.Common.Extensions
         /// </summary>
         /// <param name="str"></param>
         /// <returns>True/False</returns>
-        public static Boolean IsLong(this String str)
+        public static bool IsLong(this string str)
         {
-            return long.TryParse(str, out long num);
+            return long.TryParse(str, out long _);
         }
 
         /// <summary>
@@ -730,9 +730,9 @@ namespace Schlechtums.Core.Common.Extensions
         /// </summary>
         /// <param name="str"></param>
         /// <returns>True/False</returns>
-        public static Boolean IsDecimal(this String str)
+        public static bool IsDecimal(this string str)
         {
-            return Decimal.TryParse(str, out Decimal num);
+            return decimal.TryParse(str, out decimal _);
         }
 
         /// <summary>
@@ -740,9 +740,9 @@ namespace Schlechtums.Core.Common.Extensions
         /// </summary>
         /// <param name="str"></param>
         /// <returns>The decimal.</returns>
-        public static Decimal ToDecimal(this String str)
+        public static decimal ToDecimal(this string str)
         {
-            return Decimal.Parse(str);
+            return decimal.Parse(str);
         }
 
         /// <summary>
@@ -750,7 +750,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// </summary>
         /// <param name="str"></param>
         /// <returns>The nullable decimal.</returns>
-        public static Decimal? ToNullableDecimal(this String str)
+        public static decimal? ToNullableDecimal(this string str)
         {
             if (str.IsNullOrWhitespace())
                 return null;
@@ -763,7 +763,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// </summary>
         /// <param name="str"></param>
         /// <returns>The float.</returns>
-        public static float ToFloat(this String str)
+        public static float ToFloat(this string str)
         {
             return float.Parse(str);
         }
@@ -773,7 +773,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// </summary>
         /// <param name="str"></param>
         /// <returns>The nullable float.</returns>
-        public static float? ToNullableFloat(this String str)
+        public static float? ToNullableFloat(this string str)
         {
             if (str.IsNullOrWhitespace())
                 return null;
@@ -786,7 +786,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// </summary>
         /// <param name="str"></param>
         /// <returns>The double.</returns>
-        public static double ToDouble(this String str)
+        public static double ToDouble(this string str)
         {
             return double.Parse(str);
         }
@@ -796,7 +796,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// </summary>
         /// <param name="str"></param>
         /// <returns>The nullable double.</returns>
-        public static double? ToNullableDouble(this String str)
+        public static double? ToNullableDouble(this string str)
         {
             if (str.IsNullOrWhitespace())
                 return null;
@@ -809,9 +809,9 @@ namespace Schlechtums.Core.Common.Extensions
         /// </summary>
         /// <param name="str">Thes string</param>
         /// <returns>true/false</returns>
-        public static Boolean IsDateTime(this String str)
+        public static bool IsDateTime(this string str)
         {
-            return DateTime.TryParse(str, out DateTime dt);
+            return DateTime.TryParse(str, out DateTime _);
         }
 
         /// <summary>
@@ -820,7 +820,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="str">The string</param>
         /// <param name="format">The DateTime format</param>
         /// <returns>true/false</returns>
-        public static Boolean IsDateTimeExact(this String str, String format)
+        public static bool IsDateTimeExact(this string str, string format)
         {
             return DateTime.TryParseExact(str, format, null, System.Globalization.DateTimeStyles.None, out DateTime dt);
         }
@@ -831,12 +831,12 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="str"></param>
         /// <param name="start">The index at which to start</param>
         /// <returns>The substring</returns>
-        public static String SubstringSafe(this String str, int start)
+        public static string SubstringSafe(this string str, int start)
         {
             if (str == null)
                 return null;
 
-            return new String(str.Skip(start).ToArray());
+            return new string(str.Skip(start).ToArray());
         }
 
         /// <summary>
@@ -846,12 +846,12 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="start">The index at which to start</param>
         /// <param name="length">The length to retrieve</param>
         /// <returns>The substring</returns>
-        public static String SubstringSafe(this String str, int start, int length)
+        public static string SubstringSafe(this string str, int start, int length)
         {
             if (str == null)
                 return null;
 
-            return new String(str.Skip(start).Take(length).ToArray());
+            return new string(str.Skip(start).Take(length).ToArray());
         }
 
         /// <summary>
@@ -859,7 +859,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// </summary>
         /// <param name="str"></param>
         /// <returns>The trimmed string.</returns>
-        public static String TrimSafe(this String str)
+        public static string TrimSafe(this string str)
         {
             if (str == null)
                 return null;
@@ -872,7 +872,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// </summary>
         /// <param name="str"></param>
         /// <returns>The trimmed string.</returns>
-        public static String TrimSafe(this String str, params Char[] trimChars)
+        public static string TrimSafe(this string str, params char[] trimChars)
         {
             if (str == null)
                 return null;
@@ -885,7 +885,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// </summary>
         /// <param name="str"></param>
         /// <returns>Returns the string.ToLower() or null if it was null</returns>
-        public static String ToLowerSafe(this String str)
+        public static string ToLowerSafe(this string str)
         {
             if (str == null)
                 return null;
@@ -899,7 +899,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="str">The string</param>
         /// <param name="doUpper">True/False to perform the conversion or not</param>
         /// <returns>The lowercase representation of the string if requested</returns>
-        public static String ToLower(this String str, Boolean doLower)
+        public static string ToLower(this string str, bool doLower)
         {
             if (doLower)
                 return str.ToLower();
@@ -913,7 +913,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="str">The string</param>
         /// <param name="doUpper">True/False to perform the conversion or not</param>
         /// <returns>The uppercase representation of the string if requested</returns>
-        public static String ToUpper(this String str, Boolean doUpper)
+        public static string ToUpper(this string str, bool doUpper)
         {
             if (doUpper)
                 return str.ToUpper();
@@ -926,7 +926,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// </summary>
         /// <param name="str"></param>
         /// <returns>Returns the string.ToUpper() or null if it was null</returns>
-        public static String ToUpperSafe(this String str)
+        public static string ToUpperSafe(this string str)
         {
             if (str == null)
                 return null;
@@ -940,7 +940,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="str"></param>
         /// <param name="value">The value to search for.</param>
         /// <returns>True or false.</returns>
-        public static Boolean ContainsSafe(this String str, String value)
+        public static bool ContainsSafe(this string str, string value)
         {
             if (str == null || value == null)
                 return false;
@@ -954,7 +954,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="text"></param>
         /// <param name="toRemove">The string to remove</param>
         /// <returns>The resulting string</returns>
-        public static String Remove(this String text, String toRemove)
+        public static string Remove(this string text, string toRemove)
         {
             return text.Replace(toRemove, "");
         }
@@ -965,7 +965,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="text"></param>
         /// <param name="toRemove">The character to remove</param>
         /// <returns>The resulting string or null if the string was null</returns>
-        public static String RemoveSafe(this String text, Char toRemove)
+        public static string RemoveSafe(this string text, char toRemove)
         {
             return text.RemoveSafe(toRemove.ToString());
         }
@@ -976,7 +976,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="text"></param>
         /// <param name="toRemove">The string to remove</param>
         /// <returns>The resulting string or null if the string was null</returns>
-        public static String RemoveSafe(this String text, String toRemove)
+        public static string RemoveSafe(this string text, string toRemove)
         {
             return text.ReplaceSafe(toRemove, "");
         }
@@ -988,7 +988,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="oldChar">The character to replace.</param>
         /// <param name="newChar">The new character.</param>
         /// <returns>The string with replaced values, or null if the string was null.</returns>
-        public static String ReplaceSafe(this String text, Char oldChar, Char newChar)
+        public static string ReplaceSafe(this string text, char oldChar, char newChar)
         {
             if (text == null)
                 return null;
@@ -1003,7 +1003,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="oldValue">The string to replace.</param>
         /// <param name="newValue">The new string.</param>
         /// <returns>The string with replaced values, or null if the string was null.</returns>
-        public static String ReplaceSafe(this String text, String oldValue, String newValue)
+        public static string ReplaceSafe(this string text, string oldValue, string newValue)
         {
             if (text == null)
                 return null;
@@ -1017,16 +1017,16 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="allowedChars">A string containing the allowed characters</param>
         /// <param name="length">The length of the string</param>
         /// <returns>A random string</returns>
-        public static String GetRandomString(this String allowedChars, int length)
+        public static string GetRandomString(this string allowedChars, int length)
         {
-            var stringChars = new Char[length];
+            var stringChars = new char[length];
 
             for (int i = 0; i < length; i++)
             {
                 stringChars[i] = allowedChars[StringExtensions._Random.Next(allowedChars.Length)];
             }
 
-            return new String(stringChars);
+            return new string(stringChars);
         }
 
         /// <summary>
@@ -1034,7 +1034,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// </summary>
         /// <param name="length">The length</param>
         /// <returns>A random string</returns>
-        public static String GetRandomAlphaString(int length = 1)
+        public static string GetRandomAlphaString(int length = 1)
         {
             return "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".GetRandomString(length);
         }
@@ -1044,7 +1044,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// </summary>
         /// <param name="str">The string</param>
         /// <returns>The guid</returns>
-        public static Guid ToGuid(this String str)
+        public static Guid ToGuid(this string str)
         {
             using (var md5 = MD5.Create())
             {
@@ -1059,7 +1059,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="str"></param>
         /// <param name="c">The character with which to surround the string</param>
         /// <returns>The string surrounded by the character</returns>
-        public static String SurroundWith(this String str, Char c)
+        public static string SurroundWith(this string str, char c)
         {
             return str.SurroundWith(c.ToString());
         }
@@ -1070,7 +1070,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="str"></param>
         /// <param name="s">The string with which to surround the string</param>
         /// <returns>The string surrounded by the string</returns>
-        public static String SurroundWith(this String str, String s)
+        public static string SurroundWith(this string str, string s)
         {
             return s + str + s;
         }
@@ -1081,7 +1081,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="str">The delimited string</param>
         /// <param name="separator">The delimiter</param>
         /// <returns>The camel cased string</returns>
-        public static String ToPascalCase(this String str, Char separator)
+        public static string ToPascalCase(this string str, char separator)
         {
             if (str.IsNullOrWhitespace())
             {
@@ -1099,11 +1099,11 @@ namespace Schlechtums.Core.Common.Extensions
                     if (lastWasSeparator)
                     {
                         lastWasSeparator = false;
-                        pascalStringBuilder.Append(Char.ToUpper(c));
+                        pascalStringBuilder.Append(char.ToUpper(c));
                     }
                     else
                     {
-                        pascalStringBuilder.Append(Char.ToLower(c));
+                        pascalStringBuilder.Append(char.ToLower(c));
                     }
                 }
                 else
@@ -1120,7 +1120,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// </summary>
         /// <param name="str">The snake cased string</param>
         /// <returns>The camel cased string</returns>
-        public static String SnakeCaseToPascalCase(this String str)
+        public static string SnakeCaseToPascalCase(this string str)
         {
             return str.ToPascalCase('_');
         }
@@ -1132,7 +1132,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="keepDelimiter">True or False to keep the delimiter in the returned string</param>
         /// <param name="delimiter">The separator character</param>
         /// <returns>The capitalized string</returns>
-        public static String Capitalize(this String str, bool keepDelimiter, Char delimiter = ' ')
+        public static string Capitalize(this string str, bool keepDelimiter, char delimiter = ' ')
         {
             str = str.ToLower();
             var capitalizeNext = true;
@@ -1151,7 +1151,7 @@ namespace Schlechtums.Core.Common.Extensions
                 }
                 else if (capitalizeNext)
                 {
-                    capitalizedStringBuilder.Append(Char.ToUpper(c));
+                    capitalizedStringBuilder.Append(char.ToUpper(c));
                     capitalizeNext = false;
                 }
                 else
@@ -1170,10 +1170,10 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="json"></param>
         /// <param name="includeNonPublic">Deserialize non public members.  Defaults to false.</param>
         /// <returns>The object.</returns>
-        public static T FromJSON<T>(this String json)
+        public static T FromJSON<T>(this string json)
         {
             if (typeof(T) == typeof(XElement))
-                return (T)(dynamic)new XElement(json.FromJSON<String>());
+                return (T)(dynamic)new XElement(json.FromJSON<string>());
             else
             {
                 var options = new JsonSerializerOptions();

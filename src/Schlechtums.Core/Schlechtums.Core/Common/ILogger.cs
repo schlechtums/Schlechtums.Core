@@ -6,6 +6,6 @@ namespace Schlechtums.Core.Common
 {
     public interface ILogger
     {
-        void Log(String msg);
+        void Log(string msg);
     }
 }

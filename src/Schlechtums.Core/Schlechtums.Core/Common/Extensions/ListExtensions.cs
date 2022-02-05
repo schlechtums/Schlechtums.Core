@@ -29,7 +29,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="source">The source collection.</param>
         /// <param name="item">The item to find.</param>
         /// <returns>True/False.</returns>
-        public static Boolean ContainsSafe<T>(this ICollection<T> source, T item)
+        public static bool ContainsSafe<T>(this ICollection<T> source, T item)
         {
             if (source == null)
                 return false;
@@ -44,7 +44,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="source"></param>
         /// <param name="selector"></param>
         /// <returns></returns>
-        public static Boolean ContainsSafe<T>(this ICollection<T> source, Func<T, Boolean?> selector)
+        public static bool ContainsSafe<T>(this ICollection<T> source, Func<T, bool?> selector)
         {
             return source.AnySafe(i => selector(i));
         }

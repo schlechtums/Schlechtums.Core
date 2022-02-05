@@ -35,64 +35,64 @@ namespace Schlechtums.Core.Common
 		/// <param name="windowSizeSeconds">The window size in seconds.</param>
 		public MovingAverage(int totalNumItems, int roudingPrecision, int windowSizeSeconds)
 		{
-			this.m_MA = new MovingAverage<int>(totalNumItems, roudingPrecision, windowSizeSeconds);
+			this.ma = new MovingAverage<int>(totalNumItems, roudingPrecision, windowSizeSeconds);
 		}
 
-		private MovingAverage<int> m_MA;
+		private MovingAverage<int> ma;
 
 		/// <summary>
 		/// Gets the current window average
 		/// </summary>
-		public Double CurrentAverage => ((IMovingAverage)this.m_MA).CurrentAverage;
+		public Double CurrentAverage => ((IMovingAverage)this.ma).CurrentAverage;
 
 		/// <summary>
 		/// The current estimated time remaining based on the current window average.  Calculated with the records per second decimal precision setting.
 		/// </summary>
-		public TimeSpan CurrentTimeRemaining => ((IMovingAverage)this.m_MA).CurrentTimeRemaining;
+		public TimeSpan CurrentTimeRemaining => ((IMovingAverage)this.ma).CurrentTimeRemaining;
 
 		public int PreviousRunOffset
 		{
 			get
 			{
-				return this.m_MA.PreviousRunOffset;
+				return this.ma.PreviousRunOffset;
 			}
 			set
 			{
-				this.m_MA.PreviousRunOffset = value;
+				this.ma.PreviousRunOffset = value;
 			}
 		}
 
 		/// <summary>
 		/// Gets the current time remaining as a pretty printed string.
 		/// </summary>
-		public String CurrentTimeRemainingString => ((IMovingAverage)this.m_MA).CurrentTimeRemainingString;
+		public string CurrentTimeRemainingString => ((IMovingAverage)this.ma).CurrentTimeRemainingString;
 
 		/// <summary>
 		/// Returns a pretty printed string of the current status showing current speed and time remaining.
 		/// </summary>
-		public String CurrentStatusString => ((IMovingAverage)this.m_MA).CurrentStatusString;
+		public string CurrentStatusString => ((IMovingAverage)this.ma).CurrentStatusString;
 
-		public String GetCurrentStatusStringWithCurrTotal(int curr, int total)
+		public string GetCurrentStatusStringWithCurrTotal(int curr, int total)
 		{
-			return String.Format("{0} ({1:n0} of {2:n0})", this.CurrentStatusString, curr, total);
+			return string.Format("{0} ({1:n0} of {2:n0})", this.CurrentStatusString, curr, total);
 		}
 
 		/// <summary>
 		/// Returns the overall, non moving average of the entire operation up until this point.
 		/// </summary>
-		public Double OverallAverage => ((IMovingAverage)this.m_MA).OverallAverage;
+		public Double OverallAverage => ((IMovingAverage)this.ma).OverallAverage;
 
 		/// <summary>
 		/// Gets the time stamps in the current window
 		/// </summary>
-		public List<DateTime> CurrentTimes => ((IMovingAverage)this.m_MA).CurrentTimes;
+		public List<DateTime> CurrentTimes => ((IMovingAverage)this.ma).CurrentTimes;
 
 		/// <summary>
 		/// Sets the start time of the timed operation.  Only needed for computing the overall average at the end.
 		/// </summary>
 		public void Start()
 		{
-			((IMovingAverage)this.m_MA).Start();
+			((IMovingAverage)this.ma).Start();
 		}
 
 		/// <summary>
@@ -100,7 +100,7 @@ namespace Schlechtums.Core.Common
 		/// </summary>
 		public void Push()
 		{
-			((IMovingAverage)this.m_MA).Push();
+			((IMovingAverage)this.ma).Push();
 		}
 
 		/// <summary>
@@ -109,7 +109,7 @@ namespace Schlechtums.Core.Common
 		/// <param name="count">The number of times to push.</param>
 		public void PushMultiple(int count)
 		{
-			((IMovingAverage)this.m_MA).PushMultiple(count);
+			((IMovingAverage)this.ma).PushMultiple(count);
 		}
 
 		/// <summary>
@@ -117,7 +117,7 @@ namespace Schlechtums.Core.Common
 		/// </summary>
 		public void Reset()
 		{
-			((IMovingAverage)this.m_MA).Reset();
+			((IMovingAverage)this.ma).Reset();
 		}
 
 		/// <summary>
@@ -126,7 +126,7 @@ namespace Schlechtums.Core.Common
 		/// <param name="totalNumItems">The new total number of items.</param>
 		public void Reset(int totalNumItems)
 		{
-			((IMovingAverage)this.m_MA).Reset(totalNumItems);
+			((IMovingAverage)this.ma).Reset(totalNumItems);
 		}
 
 		/// <summary>
@@ -137,7 +137,7 @@ namespace Schlechtums.Core.Common
 		/// <param name="windowSizeSeconds">The new window size in seconds.</param>
 		public void Reset(int totalNumItems, int decimalPrecision, int windowSizeSeconds)
 		{
-			((IMovingAverage)this.m_MA).Reset(totalNumItems, decimalPrecision, windowSizeSeconds);
+			((IMovingAverage)this.ma).Reset(totalNumItems, decimalPrecision, windowSizeSeconds);
 		}
 	}
 
@@ -168,30 +168,30 @@ namespace Schlechtums.Core.Common
 		/// <param name="windowSizeSeconds">The window size in seconds.</param>
 		public MovingAverage(int totalNumItems, int roundingPrecision, int windowSizeSeconds)
 		{
-			this.m_WindowSizeSeconds = windowSizeSeconds;
-			this.m_RoundingPrecision = roundingPrecision;
-			this.m_TotalNumItems = totalNumItems;
-			this.m_Times = new Queue<Tuple<DateTime, T>>();
-			this.m_DefaultT = default(T);
-			this.m_TotalQueuedItems = 0;
+			this.windowSizeSeconds = windowSizeSeconds;
+			this.roundingPrecision = roundingPrecision;
+			this.totalNumItems = totalNumItems;
+			this.times = new Queue<Tuple<DateTime, T>>();
+			this.defaultT = default(T);
+			this.totalQueuedItems = 0;
 			this.Start();
 		}
 
-		private float m_WindowSizeSeconds;
-		private int m_RoundingPrecision;
-		public int m_TotalNumItems;
-		private Queue<Tuple<DateTime, T>> m_Times;
-		private long m_TotalQueuedItems;
-		private T m_DefaultT;
-		private DateTime? m_StartTime;
-		private Object m_LockObject = new Object();
+		private float windowSizeSeconds;
+		private int roundingPrecision;
+		private int totalNumItems;
+		private Queue<Tuple<DateTime, T>> times;
+		private long totalQueuedItems;
+		private T defaultT;
+		private DateTime? startTime;
+		private Object lockObject = new Object();
 
 		/// <summary>
 		/// Sets the start time of the timed operation.  Only needed for computing the overall average at the end.
 		/// </summary>
 		public void Start()
 		{
-			this.m_StartTime = DateTime.Now;
+			this.startTime = DateTime.Now;
 		}
 
 		/// <summary>
@@ -203,18 +203,18 @@ namespace Schlechtums.Core.Common
 			{
 				this.CullQueue();
 
-				lock (this.m_LockObject)
+				lock (this.lockObject)
 				{
 					float runningSeconds;
-					if (this.m_Times.Count == this.m_TotalQueuedItems) //we haven't culled, we are still within the first window
-						runningSeconds = (float)(DateTime.Now - this.m_Times.First().Item1).TotalSeconds;
+					if (this.times.Count == this.totalQueuedItems) //we haven't culled, we are still within the first window
+						runningSeconds = (float)(DateTime.Now - this.times.First().Item1).TotalSeconds;
 					else
-						runningSeconds = this.m_WindowSizeSeconds;
+						runningSeconds = this.windowSizeSeconds;
 
 					if (runningSeconds == 0)
 						return 0;
 					else
-						return Math.Round(this.m_Times.Count / runningSeconds, this.m_RoundingPrecision);
+						return Math.Round(this.times.Count / runningSeconds, this.roundingPrecision);
 				}
 			}
 		}
@@ -226,7 +226,7 @@ namespace Schlechtums.Core.Common
 		{
 			get
 			{
-				if (this.m_TotalNumItems < 1)
+				if (this.totalNumItems < 1)
 					return TimeSpan.FromSeconds(0);
 
 				var ca = this.CurrentAverage;
@@ -234,7 +234,7 @@ namespace Schlechtums.Core.Common
 					return TimeSpan.MaxValue;
 				else
 				{
-					return TimeSpan.FromSeconds((this.m_TotalNumItems - this.m_TotalQueuedItems - this.PreviousRunOffset) / ca);
+					return TimeSpan.FromSeconds((this.totalNumItems - this.totalQueuedItems - this.PreviousRunOffset) / ca);
 				}
 			}
 		}
@@ -244,19 +244,19 @@ namespace Schlechtums.Core.Common
 		/// <summary>
 		/// Gets the current time remaining as a pretty printed string.
 		/// </summary>
-		public String CurrentTimeRemainingString
+		public string CurrentTimeRemainingString
 		{
 			get
 			{
 				var remaining = this.CurrentTimeRemaining;
 				if (remaining.TotalDays >= 1)
-					return String.Format(@"{0:dd\.hh\:mm\:ss}", this.CurrentTimeRemaining).EnsureDoesNotStartWith("0");
+					return string.Format(@"{0:dd\.hh\:mm\:ss}", this.CurrentTimeRemaining).EnsureDoesNotStartWith("0");
 				else if (remaining.TotalHours >= 1)
-					return String.Format(@"{0:hh\:mm\:ss}", this.CurrentTimeRemaining).EnsureDoesNotStartWith("0");
+					return string.Format(@"{0:hh\:mm\:ss}", this.CurrentTimeRemaining).EnsureDoesNotStartWith("0");
 				else if (remaining.TotalMinutes >= 1)
-					return String.Format(@"{0:mm\:ss}", this.CurrentTimeRemaining).EnsureDoesNotStartWith("0");
+					return string.Format(@"{0:mm\:ss}", this.CurrentTimeRemaining).EnsureDoesNotStartWith("0");
 				else
-					return String.Format(@"{0:ss} {1}", this.CurrentTimeRemaining, ((int)this.CurrentTimeRemaining.TotalSeconds).ToPlural(word: "second")).EnsureDoesNotStartWith("0");
+					return string.Format(@"{0:ss} {1}", this.CurrentTimeRemaining, ((int)this.CurrentTimeRemaining.TotalSeconds).ToPlural(word: "second")).EnsureDoesNotStartWith("0");
 			}
 		}
 
@@ -277,11 +277,11 @@ namespace Schlechtums.Core.Common
 		/// <summary>
 		/// Returns a pretty printed string of the current status showing current speed and time remaining.
 		/// </summary>
-		public String CurrentStatusString
+		public string CurrentStatusString
 		{
 			get
 			{
-				return String.Format("{0:n" + this.m_RoundingPrecision + "}/sec, {1} remaining.  Completion time: {2}", this.CurrentAverage, this.CurrentTimeRemainingString, this.EstimatedCompletionTime);
+				return string.Format("{0:n" + this.roundingPrecision + "}/sec, {1} remaining.  Completion time: {2}", this.CurrentAverage, this.CurrentTimeRemainingString, this.EstimatedCompletionTime);
 			}
 		}
 
@@ -292,14 +292,14 @@ namespace Schlechtums.Core.Common
 		{
 			get
 			{
-				if (this.m_StartTime == null)
+				if (this.startTime == null)
 					throw new Exception("Did not set moving average start time.");
 
-				var totalSeconds = (DateTime.Now - this.m_StartTime.Value).TotalSeconds;
+				var totalSeconds = (DateTime.Now - this.startTime.Value).TotalSeconds;
 				if (totalSeconds == 0)
 					return 0;
 
-				return Math.Round(this.m_TotalQueuedItems / totalSeconds, this.m_RoundingPrecision);
+				return Math.Round(this.totalQueuedItems / totalSeconds, this.roundingPrecision);
 			}
 		}
 
@@ -311,9 +311,9 @@ namespace Schlechtums.Core.Common
 			get
 			{
 				this.CullQueue();
-				lock (this.m_LockObject)
+				lock (this.lockObject)
 				{
-					return this.m_Times.Select(t => t.Item1).ToList();
+					return this.times.Select(t => t.Item1).ToList();
 				}
 			}
 		}
@@ -326,9 +326,9 @@ namespace Schlechtums.Core.Common
 			get
 			{
 				this.CullQueue();
-				lock (this.m_LockObject)
+				lock (this.lockObject)
 				{
-					return this.m_Times.Select(t => t.Item2).ToList();
+					return this.times.Select(t => t.Item2).ToList();
 				}
 			}
 		}
@@ -338,7 +338,7 @@ namespace Schlechtums.Core.Common
 		/// </summary>
 		public void Push()
 		{
-			this.Push(this.m_DefaultT);
+			this.Push(this.defaultT);
 		}
 
 		/// <summary>
@@ -356,7 +356,7 @@ namespace Schlechtums.Core.Common
 		/// <param name="count">The number of times to push.</param>
 		public void PushMultiple(int count)
 		{
-			this.PushMultiple(this.m_DefaultT, count);
+			this.PushMultiple(this.defaultT, count);
 		}
 
 		/// <summary>
@@ -391,7 +391,7 @@ namespace Schlechtums.Core.Common
 		/// </summary>
 		public void Reset()
 		{
-			this.Reset(this.m_TotalNumItems);
+			this.Reset(this.totalNumItems);
 		}
 
 		/// <summary>
@@ -400,7 +400,7 @@ namespace Schlechtums.Core.Common
 		/// <param name="totalNumItems">The new total number of items.</param>
 		public void Reset(int totalNumItems)
 		{
-			this.Reset(totalNumItems, this.m_RoundingPrecision, (int)this.m_WindowSizeSeconds);
+			this.Reset(totalNumItems, this.roundingPrecision, (int)this.windowSizeSeconds);
 		}
 
 		/// <summary>
@@ -411,36 +411,36 @@ namespace Schlechtums.Core.Common
 		/// <param name="windowSizeSeconds">The new window size in seconds.</param>
 		public void Reset(int totalNumItems, int decimalPrecision, int windowSizeSeconds)
 		{
-			lock (this.m_LockObject)
+			lock (this.lockObject)
 			{
-				this.m_Times.Clear();
+				this.times.Clear();
 			}
 
-			this.m_WindowSizeSeconds = windowSizeSeconds;
-			this.m_RoundingPrecision = decimalPrecision;
-			this.m_TotalNumItems = totalNumItems;
-			this.m_TotalQueuedItems = 0;
-			this.m_StartTime = DateTime.Now;
+			this.windowSizeSeconds = windowSizeSeconds;
+			this.roundingPrecision = decimalPrecision;
+			this.totalNumItems = totalNumItems;
+			this.totalQueuedItems = 0;
+			this.startTime = DateTime.Now;
 		}
 
 		private void PushItem(T item, DateTime time)
 		{
-			lock (this.m_LockObject)
+			lock (this.lockObject)
 			{
-				this.m_Times.Enqueue(new Tuple<DateTime, T>(time, item));
-				this.m_TotalQueuedItems++;
+				this.times.Enqueue(new Tuple<DateTime, T>(time, item));
+				this.totalQueuedItems++;
 			}
 		}
 
 		private void CullQueue()
 		{
-			lock (this.m_LockObject)
+			lock (this.lockObject)
 			{
 				var now = DateTime.Now;
-				var cutoff = now.AddSeconds(-this.m_WindowSizeSeconds);
-				while (this.m_Times.Count > 0 && this.m_Times.Peek().Item1 < cutoff)
+				var cutoff = now.AddSeconds(-this.windowSizeSeconds);
+				while (this.times.Count > 0 && this.times.Peek().Item1 < cutoff)
 				{
-					this.m_Times.Dequeue();
+					this.times.Dequeue();
 				}
 			}
 		}
@@ -466,12 +466,12 @@ namespace Schlechtums.Core.Common
 		/// <summary>
 		/// Gets the current time remaining as a pretty printed string.
 		/// </summary>
-		String CurrentTimeRemainingString { get; }
+		string CurrentTimeRemainingString { get; }
 
 		/// <summary>
 		/// Returns a pretty printed string of the current status showing current speed and time remaining.
 		/// </summary>
-		String CurrentStatusString { get; }
+		string CurrentStatusString { get; }
 
 		/// <summary>
 		/// Returns the overall, non moving average of the entire operation up until this point.

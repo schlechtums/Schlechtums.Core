@@ -42,7 +42,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="includeNonPublic">Include non public members.  Defaults to false.</param>
         /// <param name="ignoreReferenceLoops">Ignore reference loops.  Defaults to true.</param>
         /// <returns>The JSON string.</returns>
-        public static String ToJSON(this Object obj)
+        public static string ToJSON(this Object obj)
         {
             var options = new JsonSerializerOptions();
             options.WriteIndented = true;
@@ -53,9 +53,9 @@ namespace Schlechtums.Core.Common.Extensions
         /// <summary>
         /// Safe ToString.  If the object is null it returns null
         /// </summary>
-        /// <param name="obj">The object to call ToString on</param>
+        /// <param name="obj">The object to call Tostring on</param>
         /// <returns>obj.ToString() or null</returns>
-        public static String ToStringSafe(this Object obj)
+        public static string ToStringSafe(this Object obj)
         {
             if (obj == null)
                 return null;

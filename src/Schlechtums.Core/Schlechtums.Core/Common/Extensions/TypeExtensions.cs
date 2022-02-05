@@ -12,18 +12,18 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="type">The type.</param>
         /// <param name="baseType">The base type.</param>
         /// <returns>True/False.</returns>
-        public static Boolean IsType(this Type type, Type baseType)
+        public static bool IsType(this Type type, Type baseType)
         {
             return type.DerivesFromType(baseType) || type.ImplementsInterface(baseType);
         }
 
-        public static Boolean IsGenericType(this Object obj, Type genericType)
+        public static bool IsGenericType(this Object obj, Type genericType)
         {
             var t = obj.GetType();
             return (t.IsGenericType && t.GetGenericTypeDefinition() == genericType);
         }
 
-        public static Boolean IsGenericType(this Type t, Type genericType)
+        public static bool IsGenericType(this Type t, Type genericType)
         {
             return (t.IsGenericType && t.GetGenericTypeDefinition() == genericType);
         }
@@ -34,7 +34,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="type">The type in question.</param>
         /// <param name="baseType">The base type.</param>
         /// <returns>True or False.</returns>
-        public static Boolean DerivesFromType(this Type type, Type baseType)
+        public static bool DerivesFromType(this Type type, Type baseType)
         {
             if (type == baseType) return true;
 
@@ -55,7 +55,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="interfaceType">The interface type.</param>
         /// <returns>True or False.</returns>
         /// <exception cref="ArgumentException">Thrown if the interface type passed is not an interface.</exception>
-        public static Boolean ImplementsInterface(this Object obj, Type interfaceType)
+        public static bool ImplementsInterface(this Object obj, Type interfaceType)
         {
             return obj.GetType().ImplementsInterface(interfaceType);
         }
@@ -67,7 +67,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="interfaceType">The interface type.</param>
         /// <returns>True or False.</returns>
         /// <exception cref="ArgumentException">Thrown if the interface type passed is not an interface.</exception>
-        public static Boolean ImplementsInterface(this Type type, Type interfaceType)
+        public static bool ImplementsInterface(this Type type, Type interfaceType)
         {
             return type.GetInterfaces().Any(i => i == interfaceType);
         }

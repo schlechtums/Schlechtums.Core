@@ -11,7 +11,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        public static String ToVSProjectRootPath(this DirectoryInfo dInfo)
+        public static string ToVSProjectRootPath(this DirectoryInfo dInfo)
         {
             var name = dInfo.Name;
             while (dInfo.FullName.Contains("bin"))
@@ -24,7 +24,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        public static String ToVSProjectRootPath(this FileInfo fInfo)
+        public static string ToVSProjectRootPath(this FileInfo fInfo)
         {
             var dInfo = fInfo.Directory;
             while (dInfo.FullName.Contains("bin"))
@@ -32,7 +32,7 @@ namespace Schlechtums.Core.Common.Extensions
             return Path.Combine(dInfo.FullName, fInfo.ToString()).EnsureDoesNotStartWith("\\").ToAbsolutePathFromCurrentDirectory();
         }
 
-        private static String ToAbsolutePath(this String relativeDir, String startingDir = null)
+        private static string ToAbsolutePath(this string relativeDir, string startingDir = null)
         {
             using (new CurrentDirectory(startingDir ?? Path.GetDirectoryName(Assembly.GetCallingAssembly().Location)))
             {
@@ -40,7 +40,7 @@ namespace Schlechtums.Core.Common.Extensions
             }
         }
 
-        private static String ToAbsolutePathFromCurrentDirectory(this String relativeDir)
+        private static string ToAbsolutePathFromCurrentDirectory(this string relativeDir)
         {
             return relativeDir.ToAbsolutePath(Directory.GetCurrentDirectory());
         }

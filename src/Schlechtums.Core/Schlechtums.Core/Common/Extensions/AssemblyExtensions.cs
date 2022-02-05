@@ -15,7 +15,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <typeparam name="T">The type.</typeparam>
         /// <param name="filter">An optional filter to only return types whose full name matches a string in the filter.</param>
         /// <returns>A list of types and some basic information about their assemblies.</returns>
-        public static List<TypeFromAssemblyInfo> GetTypesFromAllAssemblies<T>(IEnumerable<String> filter = null)
+        public static List<TypeFromAssemblyInfo> GetTypesFromAllAssemblies<T>(IEnumerable<string> filter = null)
         {
             return GetTypesFromAllAssemblies(false, (t) => t.IsType(typeof(T)), filter);
         }
@@ -27,7 +27,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="assemblyPath">The assembly path.</param>
         /// <param name="filter">An optional filter to only return types whose full name matches a string in the filter.</param>
         /// <returns>A list of types and some basic information about their assemblies.</returns>
-        public static List<TypeFromAssemblyInfo> GetTypesFromSpecificAssembly<T>(String assemblyPath, IEnumerable<String> filter = null)
+        public static List<TypeFromAssemblyInfo> GetTypesFromSpecificAssembly<T>(string assemblyPath, IEnumerable<string> filter = null)
         {
             return Schlechtums.Core.Common.Extensions.AssemblyExtensions.GetTypesFromSpecificAssembly(assemblyPath, false, (t) => t.IsType(typeof(T)), filter);
         }
@@ -38,7 +38,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <typeparam name="T">The type.</typeparam>
         /// <param name="filter">An optional filter to only return types whose full name matches a string in the filter.</param>
         /// <returns>A list of types and some basic information about their assemblies.</returns>
-        public static List<TypeFromAssemblyInfo> GetInstantiableTypesFromAllAssemblies<T>(IEnumerable<String> filter = null)
+        public static List<TypeFromAssemblyInfo> GetInstantiableTypesFromAllAssemblies<T>(IEnumerable<string> filter = null)
         {
             return GetTypesFromAllAssemblies(true, (t) => t.IsType(typeof(T)), filter);
         }
@@ -50,7 +50,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="assemblyPath">The assembly path.</param>
         /// <param name="filter">An optional filter to only return types whose full name matches a string in the filter.</param>
         /// <returns>A list of types and some basic information about their assemblies.</returns>
-        public static List<TypeFromAssemblyInfo> GetInstantiableTypesFromSpecificAssembly<T>(String assemblyPath, IEnumerable<String> filter = null)
+        public static List<TypeFromAssemblyInfo> GetInstantiableTypesFromSpecificAssembly<T>(string assemblyPath, IEnumerable<string> filter = null)
         {
             return Schlechtums.Core.Common.Extensions.AssemblyExtensions.GetTypesFromSpecificAssembly(assemblyPath, true, (t) => t.IsType(typeof(T)), filter);
         }
@@ -62,7 +62,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="filter">An optional filter to only return types whose full name matches a string in the filter.</param>
         /// <param name="workingDirectory">Working directory in which to find the type.</param>
         /// <returns>A list of types and some basic information about their assemblies.</returns>
-        public static List<TypeFromAssemblyInfo> GetInstantiableTypesFromAllAssemblies<T>(String workingDirectory, IEnumerable<String> filter = null)
+        public static List<TypeFromAssemblyInfo> GetInstantiableTypesFromAllAssemblies<T>(string workingDirectory, IEnumerable<string> filter = null)
         {
             return Schlechtums.Core.Common.Extensions.AssemblyExtensions.GetTypesFromAllAssemblies(true, (t) => t.IsType(typeof(T)), workingDirectory, filter);
         }
@@ -75,7 +75,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="filter">An optional filter to only return types whose full name matches a string in the filter.</param>
         /// <param name="workingDirectory">Working directory in which to find the type.</param>
         /// <returns>A list of types and some basic information about their assemblies.</returns>
-        public static List<TypeFromAssemblyInfo> GetInstantiableTypesFromAllAssemblies<T>(String assemblyPath, String workingDirectory, IEnumerable<String> filter = null)
+        public static List<TypeFromAssemblyInfo> GetInstantiableTypesFromAllAssemblies<T>(string assemblyPath, string workingDirectory, IEnumerable<string> filter = null)
         {
             return Schlechtums.Core.Common.Extensions.AssemblyExtensions.GetTypesFromSpecificAssembly(assemblyPath, true, (t) => t.IsType(typeof(T)), workingDirectory, filter).ToList();
         }
@@ -85,7 +85,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// </summary>
         ///<param name="fullName">The full name of the type.</param>
         /// <returns>A list of types and some basic information about their assemblies.</returns>
-        public static List<TypeFromAssemblyInfo> GetTypesFromAllAssembliesByFullName(String fullName)
+        public static List<TypeFromAssemblyInfo> GetTypesFromAllAssembliesByFullName(string fullName)
         {
             return GetTypesFromAllAssemblies(false, (t) => t.FullName == fullName);
         }
@@ -96,7 +96,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="assemblyPath">The assembly path.</param>
         ///<param name="fullName">The full name of the type.</param>
         /// <returns>A list of types and some basic information about their assemblies.</returns>
-        public static List<TypeFromAssemblyInfo> GetTypesFromSpecificAssemblyByFullName(String assemblyPath, String fullName)
+        public static List<TypeFromAssemblyInfo> GetTypesFromSpecificAssemblyByFullName(string assemblyPath, string fullName)
         {
             return Schlechtums.Core.Common.Extensions.AssemblyExtensions.GetTypesFromSpecificAssembly(assemblyPath, false, (t) => t.FullName == fullName);
         }
@@ -106,7 +106,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// </summary>
         ///<param name="fullName">The full name of the type.</param>
         /// <returns>A list of types and some basic information about their assemblies.</returns>
-        public static List<TypeFromAssemblyInfo> GetInstantiableTypesFromAllAssembliesByFullName(String fullName)
+        public static List<TypeFromAssemblyInfo> GetInstantiableTypesFromAllAssembliesByFullName(string fullName)
         {
             return Schlechtums.Core.Common.Extensions.AssemblyExtensions.GetTypesFromAllAssemblies(true, (t) => t.FullName == fullName);
         }
@@ -117,7 +117,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="assemblyPath">The assembly path.</param>
         ///<param name="fullName">The full name of the type.</param>
         /// <returns>A list of types and some basic information about their assemblies.</returns>
-        public static List<TypeFromAssemblyInfo> GetInstantiableTypesFromSpecificByFullName(String assemblyPath, String fullName)
+        public static List<TypeFromAssemblyInfo> GetInstantiableTypesFromSpecificByFullName(string assemblyPath, string fullName)
         {
             return Schlechtums.Core.Common.Extensions.AssemblyExtensions.GetTypesFromSpecificAssembly(assemblyPath, true, (t) => t.FullName == fullName);
         }
@@ -129,7 +129,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="match">A match function to determine which types to choose.</param>
         /// <param name="filter">An optional filter to only return types whose full name matches a string in the filter.</param>
         /// <returns>The types.</returns>
-        private static List<TypeFromAssemblyInfo> GetTypesFromAllAssemblies(Boolean onlyInstantiable, Func<Type, Boolean> match, IEnumerable<String> filter = null)
+        private static List<TypeFromAssemblyInfo> GetTypesFromAllAssemblies(bool onlyInstantiable, Func<Type, bool> match, IEnumerable<string> filter = null)
         {
             return Schlechtums.Core.Common.Extensions.AssemblyExtensions.GetTypesFromAllAssemblies(onlyInstantiable, match, Directory.GetCurrentDirectory(), filter);
         }
@@ -142,7 +142,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="match">A match function to determine which types to choose.</param>
         /// <param name="filter">An optional filter to only return types whose full name matches a string in the filter.</param>
         /// <returns>The types.</returns>
-        private static List<TypeFromAssemblyInfo> GetTypesFromSpecificAssembly(String assemblyPath, Boolean onlyInstantiable, Func<Type, Boolean> match, IEnumerable<String> filter = null)
+        private static List<TypeFromAssemblyInfo> GetTypesFromSpecificAssembly(string assemblyPath, bool onlyInstantiable, Func<Type, bool> match, IEnumerable<string> filter = null)
         {
             return Schlechtums.Core.Common.Extensions.AssemblyExtensions.GetTypesFromSpecificAssembly(assemblyPath, onlyInstantiable, match, Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), filter).ToList();
         }
@@ -155,7 +155,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="filter">An optional filter to only return types whose full name matches a string in the filter.</param>
         /// <param name="workingDirectory">Working directory in which to find the type.</param>
         /// <returns>The types.</returns>
-        public static List<TypeFromAssemblyInfo> GetTypesFromAllAssemblies(Boolean onlyInstantiable, Func<Type, Boolean> match, String workingDirectory, IEnumerable<String> filter = null)
+        public static List<TypeFromAssemblyInfo> GetTypesFromAllAssemblies(bool onlyInstantiable, Func<Type, bool> match, string workingDirectory, IEnumerable<string> filter = null)
         {
             var ret = new List<TypeFromAssemblyInfo>();
 
@@ -183,9 +183,9 @@ namespace Schlechtums.Core.Common.Extensions
         /// <param name="filter">An optional filter to only return types whose full name matches a string in the filter.</param>
         /// <param name="workingDirectory">Working directory in which to find the type.</param>
         /// <returns>The types.</returns>
-        public static IEnumerable<TypeFromAssemblyInfo> GetTypesFromSpecificAssembly(String assemblyPath, Boolean onlyInstantiable, Func<Type, Boolean> match, String workingDirectory, IEnumerable<String> filter = null)
+        public static IEnumerable<TypeFromAssemblyInfo> GetTypesFromSpecificAssembly(string assemblyPath, bool onlyInstantiable, Func<Type, bool> match, string workingDirectory, IEnumerable<string> filter = null)
         {
-            var typeFilter = filter == null ? null : new HashSet<String>(filter);
+            var typeFilter = filter == null ? null : new HashSet<string>(filter);
 
             var asm = Assembly.LoadFrom(assemblyPath);
             var assemblyTypes = asm.GetTypes();

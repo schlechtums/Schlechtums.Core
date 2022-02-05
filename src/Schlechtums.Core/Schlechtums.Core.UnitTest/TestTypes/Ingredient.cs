@@ -14,7 +14,7 @@ namespace Schlechtums.Core.UnitTest.TestTypes
             this.Id = Guid.NewGuid().ToString();
         }
 
-        public Ingredient(String name, Dictionary<String, String> mviwValues)
+        public Ingredient(string name, Dictionary<string, string> mviwValues)
             : this(name,
                   mviwValues["Grams Per Each"].ToNullableDecimal() ?? 0,
                    mviwValues["Grams Per Tsp"].ToNullableDecimal() ?? 0,
@@ -33,7 +33,7 @@ namespace Schlechtums.Core.UnitTest.TestTypes
                    mviwValues["Protein Per Each"].ToNullableDecimal() ?? 0)
         { }
 
-        internal Ingredient(String name, decimal gramsPerEach, decimal gramsPerTsp, decimal dollarsPerEach, decimal caloriesPerEach,
+        internal Ingredient(string name, decimal gramsPerEach, decimal gramsPerTsp, decimal dollarsPerEach, decimal caloriesPerEach,
                             decimal caloriesFromFatPerEach, decimal totalFatPerEach, decimal satFatPerEach, decimal monoUnsatFatPerEach,
                             decimal polyUnsatFatPerEach, decimal cholesterolPerEach, decimal sodiumPerEach, decimal totalCarbPerEach,
                             decimal sugarPerEach, decimal fiberPerEach, decimal proteinPerEach)
@@ -64,7 +64,7 @@ namespace Schlechtums.Core.UnitTest.TestTypes
             }
         }
 
-        internal Ingredient(String name, String id, decimal gramsPerEach, decimal gramsPerTsp, decimal dollarsPerGram, decimal caloriesPerGram, decimal caloriesPerFatGram, decimal totalFatPerGram, decimal satFatPerGram, decimal monoUnsatFatPerGram, decimal polyUnsatFatPerGram, decimal cholesterolPerGram, decimal sodiumPerGram, decimal totalCarbPerGram, decimal sugarPerGram, decimal fiberPerGram, decimal proteinPerGram)
+        internal Ingredient(string name, string id, decimal gramsPerEach, decimal gramsPerTsp, decimal dollarsPerGram, decimal caloriesPerGram, decimal caloriesPerFatGram, decimal totalFatPerGram, decimal satFatPerGram, decimal monoUnsatFatPerGram, decimal polyUnsatFatPerGram, decimal cholesterolPerGram, decimal sodiumPerGram, decimal totalCarbPerGram, decimal sugarPerGram, decimal fiberPerGram, decimal proteinPerGram)
             : this(name, gramsPerEach, gramsPerTsp, dollarsPerGram * gramsPerEach, caloriesPerGram * gramsPerEach,
                    caloriesPerFatGram * gramsPerEach, totalFatPerGram * gramsPerEach, satFatPerGram * gramsPerEach,
                    monoUnsatFatPerGram * gramsPerEach, polyUnsatFatPerGram * gramsPerEach, cholesterolPerGram * gramsPerEach,
@@ -74,9 +74,9 @@ namespace Schlechtums.Core.UnitTest.TestTypes
             this._IsRecipe = true;
         }
 
-        internal Boolean _IsRecipe;
-        private String _Id;
-        public String Id
+        internal bool _IsRecipe;
+        private string _Id;
+        public string Id
         {
             get { return this._Id; }
             set
@@ -89,8 +89,8 @@ namespace Schlechtums.Core.UnitTest.TestTypes
             }
         }
 
-        private String _Name;
-        public String Name
+        private string _Name;
+        public string Name
         {
             get { return this._Name; }
             set
@@ -103,8 +103,8 @@ namespace Schlechtums.Core.UnitTest.TestTypes
             }
         }
 
-        private String _IngredientStringName;
-        public String IngredientStringName
+        private string _IngredientStringName;
+        public string IngredientStringName
         {
             get { return this._IngredientStringName; }
             set
@@ -117,8 +117,8 @@ namespace Schlechtums.Core.UnitTest.TestTypes
             }
         }
 
-        private Decimal _GramsPerEach;
-        public Decimal GramsPerEach
+        private decimal _GramsPerEach;
+        public decimal GramsPerEach
         {
             get { return this._GramsPerEach; }
             set
@@ -131,8 +131,8 @@ namespace Schlechtums.Core.UnitTest.TestTypes
             }
         }
 
-        private Decimal _GramsPerTsp;
-        public Decimal GramsPerTsp
+        private decimal _GramsPerTsp;
+        public decimal GramsPerTsp
         {
             get { return this._GramsPerTsp; }
             set
@@ -145,8 +145,8 @@ namespace Schlechtums.Core.UnitTest.TestTypes
             }
         }
 
-        private Decimal _DollarsPerGram;
-        public Decimal DollarsPerGram
+        private decimal _DollarsPerGram;
+        public decimal DollarsPerGram
         {
             get { return this._DollarsPerGram; }
             set
@@ -159,8 +159,8 @@ namespace Schlechtums.Core.UnitTest.TestTypes
             }
         }
 
-        private Decimal _CaloriesPerGram;
-        public Decimal CaloriesPerGram
+        private decimal _CaloriesPerGram;
+        public decimal CaloriesPerGram
         {
             get { return this._CaloriesPerGram; }
             set
@@ -173,8 +173,8 @@ namespace Schlechtums.Core.UnitTest.TestTypes
             }
         }
 
-        private Decimal _CaloriesFromFatPerGram;
-        public Decimal CaloriesFromFatPerGram
+        private decimal _CaloriesFromFatPerGram;
+        public decimal CaloriesFromFatPerGram
         {
             get { return this._CaloriesFromFatPerGram; }
             set
@@ -187,8 +187,8 @@ namespace Schlechtums.Core.UnitTest.TestTypes
             }
         }
 
-        private Decimal _FatPerGram;
-        public Decimal TotalFatPerGram
+        private decimal _FatPerGram;
+        public decimal TotalFatPerGram
         {
             get { return this._FatPerGram; }
             set
@@ -201,8 +201,8 @@ namespace Schlechtums.Core.UnitTest.TestTypes
             }
         }
 
-        private Decimal _SatFatPerGram;
-        public Decimal SatFatPerGram
+        private decimal _SatFatPerGram;
+        public decimal SatFatPerGram
         {
             get { return this._SatFatPerGram; }
             set
@@ -215,9 +215,9 @@ namespace Schlechtums.Core.UnitTest.TestTypes
             }
         }
 
-        private Decimal _MonoUnsaturatedFatPerGram;
+        private decimal _MonoUnsaturatedFatPerGram;
         [DALSQLParameterName("MonoUnsatFatPerGram")]
-        public Decimal MonoUnsaturatedFatPerGram
+        public decimal MonoUnsaturatedFatPerGram
         {
             get { return this._MonoUnsaturatedFatPerGram; }
             set
@@ -230,9 +230,9 @@ namespace Schlechtums.Core.UnitTest.TestTypes
             }
         }
 
-        private Decimal _PolyunsaturatedFatPerGram;
+        private decimal _PolyunsaturatedFatPerGram;
         [DALSQLParameterName("PolyUnsatFatPerGram")]
-        public Decimal PolyunsaturatedFatPerGram
+        public decimal PolyunsaturatedFatPerGram
         {
             get { return this._PolyunsaturatedFatPerGram; }
             set
@@ -245,8 +245,8 @@ namespace Schlechtums.Core.UnitTest.TestTypes
             }
         }
 
-        private Decimal _CholesterolPerGram;
-        public Decimal CholesterolPerGram
+        private decimal _CholesterolPerGram;
+        public decimal CholesterolPerGram
         {
             get { return this._CholesterolPerGram; }
             set
@@ -259,8 +259,8 @@ namespace Schlechtums.Core.UnitTest.TestTypes
             }
         }
 
-        private Decimal _SodiumPerGram;
-        public Decimal SodiumPerGram
+        private decimal _SodiumPerGram;
+        public decimal SodiumPerGram
         {
             get { return this._SodiumPerGram; }
             set
@@ -273,8 +273,8 @@ namespace Schlechtums.Core.UnitTest.TestTypes
             }
         }
 
-        private Decimal _TotalCarbPerGram;
-        public Decimal TotalCarbPerGram
+        private decimal _TotalCarbPerGram;
+        public decimal TotalCarbPerGram
         {
             get { return this._TotalCarbPerGram; }
             set
@@ -287,8 +287,8 @@ namespace Schlechtums.Core.UnitTest.TestTypes
             }
         }
 
-        private Decimal _SugarPerGram;
-        public Decimal SugarPerGram
+        private decimal _SugarPerGram;
+        public decimal SugarPerGram
         {
             get { return this._SugarPerGram; }
             set
@@ -301,8 +301,8 @@ namespace Schlechtums.Core.UnitTest.TestTypes
             }
         }
 
-        private Decimal _FiberPerGram;
-        public Decimal FiberPerGram
+        private decimal _FiberPerGram;
+        public decimal FiberPerGram
         {
             get { return this._FiberPerGram; }
             set
@@ -315,8 +315,8 @@ namespace Schlechtums.Core.UnitTest.TestTypes
             }
         }
 
-        private Decimal _ProteinPerGram;
-        public Decimal ProteinPerGram
+        private decimal _ProteinPerGram;
+        public decimal ProteinPerGram
         {
             get { return this._ProteinPerGram; }
             set
@@ -329,7 +329,7 @@ namespace Schlechtums.Core.UnitTest.TestTypes
             }
         }
 
-        public Decimal DollarsPerEach
+        public decimal DollarsPerEach
         {
             get
             {
@@ -342,7 +342,7 @@ namespace Schlechtums.Core.UnitTest.TestTypes
             }
         }
 
-        public Decimal CaloriesPerEach
+        public decimal CaloriesPerEach
         {
             get
             {
@@ -355,7 +355,7 @@ namespace Schlechtums.Core.UnitTest.TestTypes
             }
         }
 
-        public Decimal CaloriesFromFatPerEach
+        public decimal CaloriesFromFatPerEach
         {
             get
             {
@@ -368,7 +368,7 @@ namespace Schlechtums.Core.UnitTest.TestTypes
             }
         }
 
-        public Decimal TotalFatPerEach
+        public decimal TotalFatPerEach
         {
             get
             {
@@ -381,7 +381,7 @@ namespace Schlechtums.Core.UnitTest.TestTypes
             }
         }
 
-        public Decimal SatFatPerEach
+        public decimal SatFatPerEach
         {
             get
             {
@@ -394,7 +394,7 @@ namespace Schlechtums.Core.UnitTest.TestTypes
             }
         }
 
-        public Decimal MonoUnsaturatedFatPerEach
+        public decimal MonoUnsaturatedFatPerEach
         {
             get
             {
@@ -407,7 +407,7 @@ namespace Schlechtums.Core.UnitTest.TestTypes
             }
         }
 
-        public Decimal PolyunsaturatedFatPerEach
+        public decimal PolyunsaturatedFatPerEach
         {
             get
             {
@@ -420,7 +420,7 @@ namespace Schlechtums.Core.UnitTest.TestTypes
             }
         }
 
-        public Decimal CholesterolPerEach
+        public decimal CholesterolPerEach
         {
             get
             {
@@ -433,7 +433,7 @@ namespace Schlechtums.Core.UnitTest.TestTypes
             }
         }
 
-        public Decimal SodiumPerEach
+        public decimal SodiumPerEach
         {
             get
             {
@@ -446,7 +446,7 @@ namespace Schlechtums.Core.UnitTest.TestTypes
             }
         }
 
-        public Decimal TotalCarbPerEach
+        public decimal TotalCarbPerEach
         {
             get
             {
@@ -459,7 +459,7 @@ namespace Schlechtums.Core.UnitTest.TestTypes
             }
         }
 
-        public Decimal SugarPerEach
+        public decimal SugarPerEach
         {
             get
             {
@@ -472,7 +472,7 @@ namespace Schlechtums.Core.UnitTest.TestTypes
             }
         }
 
-        public Decimal FiberPerEach
+        public decimal FiberPerEach
         {
             get
             {
@@ -485,7 +485,7 @@ namespace Schlechtums.Core.UnitTest.TestTypes
             }
         }
 
-        public Decimal ProteinPerEach
+        public decimal ProteinPerEach
         {
             get
             {
@@ -499,6 +499,6 @@ namespace Schlechtums.Core.UnitTest.TestTypes
         }
 
         [DALIgnore]
-        public String IgnoreThis { get; set; }
+        public string IgnoreThis { get; set; }
     }
 }

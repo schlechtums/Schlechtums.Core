@@ -11,7 +11,7 @@ namespace Schlechtums.Core.Common.Extensions
         /// </summary>
         /// <param name="f">The FileInfo object.</param>
         /// <returns>True/False if it is locked.</returns>
-        public static Boolean IsLocked(this FileInfo f)
+        public static bool IsLocked(this FileInfo f)
         {
             try
             {

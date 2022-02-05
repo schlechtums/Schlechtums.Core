@@ -1076,6 +1076,94 @@ namespace Schlechtums.Core.Common.Extensions
         }
 
         /// <summary>
+        /// Returns the pascal case version of a delimited string
+        /// </summary>
+        /// <param name="str">The delimited string</param>
+        /// <param name="separator">The delimiter</param>
+        /// <returns>The camel cased string</returns>
+        public static String ToPascalCase(this String str, Char separator)
+        {
+            if (str.IsNullOrWhitespace())
+            {
+                return str;
+            }
+
+            var pascalStringBuilder = new StringBuilder();
+
+            var lastWasSeparator = true;
+
+            foreach (var c in str)
+            {
+                if (c != separator)
+                {
+                    if (lastWasSeparator)
+                    {
+                        lastWasSeparator = false;
+                        pascalStringBuilder.Append(Char.ToUpper(c));
+                    }
+                    else
+                    {
+                        pascalStringBuilder.Append(Char.ToLower(c));
+                    }
+                }
+                else
+                {
+                    lastWasSeparator = true;
+                }
+            }
+
+            return pascalStringBuilder.ToString();
+        }
+
+        /// <summary>
+        /// Returns the camel cased version of a snake cased string
+        /// </summary>
+        /// <param name="str">The snake cased string</param>
+        /// <returns>The camel cased string</returns>
+        public static String SnakeCaseToPascalCase(this String str)
+        {
+            return str.ToPascalCase('_');
+        }
+
+        /// <summary>
+        /// Capitalizes a string by making the first character after each instance of the delimiter a capital letter
+        /// </summary>
+        /// <param name="str">The string to capitalize</param>
+        /// <param name="keepDelimiter">True or False to keep the delimiter in the returned string</param>
+        /// <param name="delimiter">The separator character</param>
+        /// <returns>The capitalized string</returns>
+        public static String Capitalize(this String str, bool keepDelimiter, Char delimiter = ' ')
+        {
+            str = str.ToLower();
+            var capitalizeNext = true;
+
+            var capitalizedStringBuilder = new StringBuilder();
+
+            foreach (var c in str)
+            {
+                if (c == delimiter)
+                {
+                    if (keepDelimiter)
+                    {
+                        capitalizedStringBuilder.Append(c);
+                    }
+                    capitalizeNext = true;
+                }
+                else if (capitalizeNext)
+                {
+                    capitalizedStringBuilder.Append(Char.ToUpper(c));
+                    capitalizeNext = false;
+                }
+                else
+                {
+                    capitalizedStringBuilder.Append(c);
+                }
+            }
+
+            return capitalizedStringBuilder.ToString();
+        }
+
+        /// <summary>
         /// Deserializes a JSON string back into an object.
         /// </summary>
         /// <typeparam name="T"></typeparam>

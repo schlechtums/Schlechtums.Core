@@ -1164,6 +1164,73 @@ namespace Schlechtums.Core.Common.Extensions
         }
 
         /// <summary>
+        /// Converts the given bytes to a Base64 string.
+        /// </summary>
+        /// <param name="bytes">The bytes.</param>
+        /// <returns>The Base64 encoded string.</returns>
+        public static String ToBase64(this Byte[] bytes)
+        {
+            if (bytes == null)
+                return null;
+
+            return Convert.ToBase64String(bytes);
+        }
+
+        /// <summary>
+        /// Converts the given string to Base64 using UTF8 encoding.
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns>The Base64 encoded string.</returns>
+        public static String ToBase64(this String str)
+        {
+            if (str == null)
+                return null;
+
+            return str.ToBase64(Encoding.UTF8);
+        }
+
+        /// <summary>
+        /// Converts the given string to Base64 using the given encoding.
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="enc">The encoding.</param>
+        /// <returns>The Base64 encoded string.</returns>
+        public static String ToBase64(this String str, Encoding enc)
+        {
+            if (str == null)
+                return null;
+
+            return Convert.ToBase64String(enc.GetBytes(str));
+        }
+
+        /// <summary>
+        /// Converts the given string from Base64 using UTF8 encoding.
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns>The Base64 string decoded.</returns>
+        public static String FromBase64(this String str)
+        {
+            if (str == null)
+                return null;
+
+            return str.FromBase64(Encoding.UTF8);
+        }
+
+        /// <summary>
+        /// Converts the given string from Base64 using the given encoding.
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="enc">The encoding.</param>
+        /// <returns>The Base64 string decoded.</returns>
+        public static String FromBase64(this String str, Encoding enc)
+        {
+            if (str == null)
+                return null;
+
+            return enc.GetString(Convert.FromBase64String(str));
+        }
+
+        /// <summary>
         /// Deserializes a JSON string back into an object.
         /// </summary>
         /// <typeparam name="T"></typeparam>

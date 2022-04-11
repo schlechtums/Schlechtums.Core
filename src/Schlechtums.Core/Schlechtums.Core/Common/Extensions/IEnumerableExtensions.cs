@@ -448,5 +448,53 @@ namespace Schlechtums.Core.Common.Extensions
             else
                 return source.ToList();
         }
+
+        public static EnumerationJoins<T, TKey> GetAddedRemovedModifiedJoins<T, TKey>(this IEnumerable<T> left, IEnumerable<T> right, Func<T, TKey> keySelector)
+            where T : IEquatable<T>
+        {
+            return new EnumerationJoins<T, TKey>(right, left, keySelector);
+        }
+    }
+
+    public class EnumerationJoins<T, TKey>
+        where T : IEquatable<T>
+    {
+        internal EnumerationJoins(IEnumerable<T> right, IEnumerable<T> left, Func<T, TKey> keySelector)
+        {
+            var addedOrModified = (from r in right ?? new List<T>()
+                                   join l in left ?? new List<T>() on keySelector(r) equals keySelector(l)
+                                   into leftJoin
+                                   from lj in leftJoin.DefaultIfEmpty()
+                                   select new ModifiedEnumerationItem<T>
+                                   {
+                                       Left = lj,
+                                       Right = r
+                                   }).ToList();
+
+            this.AddedItems = addedOrModified.Where(aom => aom.Left == null).Select(aom => aom.Right).ToList();
+            this.ModifiedItems = addedOrModified.Where(aom => aom.Left != null && !aom.Right.Equals(aom.Left)).ToList();
+            this.IdenticalItems = addedOrModified.Where(aom => aom.Left != null && aom.Right.Equals(aom.Left)).Select(aom => aom.Left).ToList();
+
+            this.RemovedItems = (from r in left ?? new List<T>()
+                                 join l in right ?? new List<T>() on keySelector(r) equals keySelector(l)
+                                 into leftJoin
+                                 from lf in leftJoin.DefaultIfEmpty()
+                                 where lf == null
+                                 select r).ToList();
+
+
+        }
+
+        public List<T> AddedItems { get; set; }
+        public List<T> RemovedItems { get; set; }
+        public List<ModifiedEnumerationItem<T>> ModifiedItems { get; set; }
+        public List<T> IdenticalItems { get; set; }
+        public int TotalItems { get { return this.AddedItems.Count + this.RemovedItems.Count + this.ModifiedItems.Count; } }
+    }
+
+    public class ModifiedEnumerationItem<T>
+    {
+        public T Left { get; set; }
+        public T Right { get; set; }
     }
 }

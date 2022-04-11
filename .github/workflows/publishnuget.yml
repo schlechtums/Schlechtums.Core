@@ -71,13 +71,6 @@ jobs:
         shell: pwsh
         run: dotnet tool update dotnet-sonarscanner --global
 
-      - name: Setup .NET Core @ Latest
-        uses: actions/setup-dotnet@v1
-        with:
-          source-url: https://nuget.pkg.github.com/schlechtums/index.json
-        env:
-          NUGET_AUTH_TOKEN: ${{secrets.GITHUBTOKEN}}
-
       - name: Install coverlet.console
         shell: pwsh
         run: |

@@ -1,4 +1,4 @@
-name: Unit Test
+name: Unit Test PR
 
 on:
   pull_request:
@@ -11,7 +11,7 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: Unit Test Commit
+    name: Unit Test PR
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2

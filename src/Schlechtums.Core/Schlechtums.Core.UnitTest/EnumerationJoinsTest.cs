@@ -33,6 +33,7 @@ namespace Schlechtums.Core.UnitTest
             joins.RemovedItems.Should().HaveCount(1);
             joins.ModifiedItems.Should().HaveCount(1);
             joins.IdenticalItems.Should().HaveCount(1);
+            joins.TotalItems.Should().Be(3);
 
             joins.AddedItems.Single().Should().BeEquivalentTo(new JoinTestClass("p4", 27, "cars"));
             joins.RemovedItems.Single().Should().BeEquivalentTo(new JoinTestClass("p3", 30, "music"));

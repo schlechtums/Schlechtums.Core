@@ -12,6 +12,7 @@
 	  <DelaySign>false</DelaySign>
 	  <AssemblyOriginatorKeyFile>Schlechtums.Core.snk</AssemblyOriginatorKeyFile>
 	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	  <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Resources\accept.png" />

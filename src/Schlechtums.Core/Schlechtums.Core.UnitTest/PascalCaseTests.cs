@@ -1,22 +1,23 @@
 ﻿using Schlechtums.Core.Common.Extensions;
-using Xunit;
+using NUnit.Framework;
+using FluentAssertions;
 
 namespace Schlechtums.Core.UnitTest
 {
     public class PascalCaseTests
     {
-        [Fact]
+        [Test]
         public void SnakeCaseToPascalCase()
         {
             var str = "helloWorld";
-            Assert.Equal("Helloworld", str.SnakeCaseToPascalCase());
+            str.SnakeCaseToPascalCase().Should().Be("Helloworld");
         }
 
-        [Fact]
+        [Test]
         public void JsonAttributeToPascalCase()
         {
             var str = "hello_world";
-            Assert.Equal("HelloWorld", str.SnakeCaseToPascalCase());
+            str.SnakeCaseToPascalCase().Should().Be("HelloWorld");
         }
     }
 }

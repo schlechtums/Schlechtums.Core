@@ -1,13 +1,14 @@
 ﻿using Schlechtums.Core.Common.Extensions;
 using Schlechtums.Core.UnitTest.TestTypes;
 using System.Linq;
-using Xunit;
+using NUnit.Framework;
+using FluentAssertions;
 
 namespace Schlechtums.Core.UnitTest
 {
     public class PropertyInfoAttributeTest
     {
-        [Fact]
+        [Test]
         public void GetAttributeTest()
         {
             var ignoredTypeProperties = typeof(Ingredient).GetProperties()
@@ -15,19 +16,19 @@ namespace Schlechtums.Core.UnitTest
                                                           .Select(p => p.Name)
                                                           .ToHashSet();
 
-            Assert.Single(ignoredTypeProperties);
-            Assert.Equal(nameof(Ingredient.IgnoreThis), ignoredTypeProperties.Single());
+            ignoredTypeProperties.Should().HaveCount(1);
+            ignoredTypeProperties.Single().Should().Be(nameof(Ingredient.IgnoreThis));
             
 
             var propertyNamesToDALName = typeof(Ingredient).GetProperties()
                                                            .Where(p => p.GetAttribute<DALIgnoreAttribute>() == null)
                                                            .ToDictionary(p => p.Name, p => p.GetAttribute<DALSQLParameterNameAttribute>()?.Name ?? p.Name);
 
-            Assert.Equal(31, propertyNamesToDALName.Count);
-            Assert.Equal("Id", propertyNamesToDALName[nameof(Ingredient.Id)]);
-            Assert.Equal("FiberPerEach", propertyNamesToDALName[nameof(Ingredient.FiberPerEach)]);
-            Assert.Equal("MonoUnsatFatPerGram", propertyNamesToDALName[nameof(Ingredient.MonoUnsaturatedFatPerGram)]);
-            Assert.Equal("PolyUnsatFatPerGram", propertyNamesToDALName[nameof(Ingredient.PolyunsaturatedFatPerGram)]);
+            propertyNamesToDALName.Count.Should().Be(31);
+            propertyNamesToDALName[nameof(Ingredient.Id)].Should().Be("Id");
+            propertyNamesToDALName[nameof(Ingredient.FiberPerEach)].Should().Be("FiberPerEach");
+            propertyNamesToDALName[nameof(Ingredient.MonoUnsaturatedFatPerGram)].Should().Be("MonoUnsatFatPerGram");
+            propertyNamesToDALName[nameof(Ingredient.PolyunsaturatedFatPerGram)].Should().Be("PolyUnsatFatPerGram");
         }
     }
 }

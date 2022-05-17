@@ -36,7 +36,7 @@ jobs:
   SonarQube:
     runs-on: ubuntu-latest
     name: SonarQube Analyze
-    needS: UnitTest
+    needs: UnitTest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2

@@ -53,6 +53,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
 
       - name: Set up JDK 11
         uses: actions/setup-java@v1
@@ -89,7 +91,7 @@ jobs:
         shell: pwsh
         run: |
           cd ${{ env.SOLUTION_FOLDER }}
-          dotnet-sonarscanner begin /d:sonar.cs.opencover.reportsPaths=coverage.opencover.xml /k:"schlechtums_Schlechtums.Core" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="${{ secrets.SONAR_HOST_URL }}"
+          dotnet-sonarscanner begin /d:sonar.cs.opencover.reportsPaths=coverage.opencover.xml /k:"schlechtums_Schlechtums.Core" /o:"schlechtums" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
           dotnet build
           coverlet Schlechtums.Core.UnitTest/bin/Debug/netcoreapp3.1/Schlechtums.Core.UnitTest.dll --target "dotnet" --targetargs "test --no-build" --format opencover
           dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"

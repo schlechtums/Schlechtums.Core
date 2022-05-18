@@ -4,13 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Xunit;
+using NUnit.Framework;
 
 namespace Schlechtums.Core.UnitTest
 {
     public class EnumerationJoinsTest
     {
-        [Fact]
+        [Test]
         public void EnumerationJoinsTest_ShouldJoinCorrectly()
         {
             var left = new List<JoinTestClass>

@@ -3,109 +3,110 @@ using Schlechtums.Core.Common.Extensions;
 using System;
 using System.IO;
 using System.Text;
-using Xunit;
+using NUnit.Framework;
+using FluentAssertions;
 
 namespace Schlechtums.Core.UnitTest
 {
 
     public class TemporaryFileTest
     {
-        private string _TestText = @"Hello
+        private string testText = @"Hello
 World!";
 
-        private string[] _TestLines = new[] { "Hello", "World!" };
+        private string[] testLines = new[] { "Hello", "World!" };
 
-        private byte[] _TestBytes = @"Hello
+        private byte[] testBytes = @"Hello
 World!".GetBytes();
 
         private Encoding _TestEncoding = Encoding.ASCII;
 
-        [Fact]
+        [Test]
         public void TextTest()
         {
             using (var tf = new TemporaryFile())
             {
-                tf.WriteAllText(this._TestText);
+                tf.WriteAllText(this.testText);
 
-                Assert.Equal(this._TestText, tf.ReadAllText());
-                Assert.Equal(File.ReadAllText(tf.FullPath), tf.ReadAllText());
+                tf.ReadAllText().Should().Be(this.testText);
+                tf.ReadAllText().Should().Be(File.ReadAllText(tf.FullPath));
             }
         }
 
-        [Fact]
+        [Test]
         public void TextEncodingTest()
         {
             using (var tf = new TemporaryFile())
             {
-                tf.WriteAllText(this._TestText, this._TestEncoding);
+                tf.WriteAllText(this.testText, this._TestEncoding);
 
-                Assert.Equal(this._TestText, tf.ReadAllText(this._TestEncoding));
-                Assert.Equal(File.ReadAllText(tf.FullPath, this._TestEncoding), tf.ReadAllText(this._TestEncoding));
+                tf.ReadAllText(this._TestEncoding).Should().Be(this.testText);
+                tf.ReadAllText(this._TestEncoding).Should().Be(File.ReadAllText(tf.FullPath, this._TestEncoding));
             }
         }
 
-        [Fact]
+        [Test]
         public void LinesTest()
         {
             using (var tf = new TemporaryFile())
             {
-                tf.WriteAllLines(this._TestLines);
+                tf.WriteAllLines(this.testLines);
 
-                Assert.Equal(this._TestLines.JoinWithNewline(), tf.ReadAllLines().JoinWithNewline());
-                Assert.Equal(File.ReadAllLines(tf.FullPath).JoinWithNewline(), tf.ReadAllLines().JoinWithNewline());
+                tf.ReadAllLines().JoinWithNewline().Should().Be(this.testLines.JoinWithNewline());
+                tf.ReadAllLines().JoinWithNewline().Should().Be(File.ReadAllLines(tf.FullPath).JoinWithNewline());
             }
         }
 
-        [Fact]
+        [Test]
         public void LinesEncodingTest()
         {
             using (var tf = new TemporaryFile())
             {
-                tf.WriteAllLines(this._TestLines, this._TestEncoding);
+                tf.WriteAllLines(this.testLines, this._TestEncoding);
 
-                Assert.Equal(this._TestLines.JoinWithNewline(), tf.ReadAllLines(this._TestEncoding).JoinWithNewline());
-                Assert.Equal(File.ReadAllLines(tf.FullPath, this._TestEncoding).JoinWithNewline(), tf.ReadAllLines(this._TestEncoding).JoinWithNewline());
+                tf.ReadAllLines(this._TestEncoding).JoinWithNewline().Should().Be(this.testLines.JoinWithNewline());
+                tf.ReadAllLines(this._TestEncoding).JoinWithNewline().Should().Be(File.ReadAllLines(tf.FullPath, this._TestEncoding).JoinWithNewline());
             }
         }
 
-        [Fact]
+        [Test]
         public void BytesTest()
         {
             using (var tf = new TemporaryFile())
             {
-                tf.WriteAllBytes(this._TestBytes);
+                tf.WriteAllBytes(this.testBytes);
 
-                Assert.True(this.ByteArraysAreSame(this._TestBytes, tf.ReadAllBytes()));
-                Assert.True(this.ByteArraysAreSame(File.ReadAllBytes(tf.FullPath), tf.ReadAllBytes()));
+                this.ByteArraysAreSame(this.testBytes, tf.ReadAllBytes()).Should().BeTrue();
+                this.ByteArraysAreSame(File.ReadAllBytes(tf.FullPath), tf.ReadAllBytes()).Should().BeTrue();
             }
         }
 
-        [Fact]
+        [Test]
         public void TextStaticTest()
         {
-            using (var tf = TemporaryFile.WithContent(this._TestText))
+            using (var tf = TemporaryFile.WithContent(this.testText))
             {
-                Assert.Equal(this._TestText, tf.ReadAllText());
-                Assert.Equal(File.ReadAllText(tf.FullPath), tf.ReadAllText());
+                tf.ReadAllText().Should().Be(this.testText);
+                tf.ReadAllText().Should().Be(File.ReadAllText(tf.FullPath));
             }
         }
 
-        [Fact]
+        [Test]
         public void LinesStaticTest()
         {
-            using (var tf = TemporaryFile.WithContent(this._TestLines))
+            using (var tf = TemporaryFile.WithContent(this.testLines))
             {
-                Assert.Equal(this._TestLines.JoinWithNewline(), tf.ReadAllLines().JoinWithNewline());
-                Assert.Equal(File.ReadAllLines(tf.FullPath).JoinWithNewline(), tf.ReadAllLines().JoinWithNewline());
+                tf.ReadAllLines().JoinWithNewline().Should().Be(this.testLines.JoinWithNewline());
+                tf.ReadAllLines().JoinWithNewline().Should().Be(File.ReadAllLines(tf.FullPath).JoinWithNewline());
             }
         }
 
-        [Fact]
+        [Test]
         public void BytesStaticTest()
         {
-            using (var tf = TemporaryFile.WithContent(this._TestBytes))
+            using (var tf = TemporaryFile.WithContent(this.testBytes))
             {
-                Assert.True(this.ByteArraysAreSame(this._TestBytes, tf.ReadAllBytes()));
+                Assert.True(this.ByteArraysAreSame(this.testBytes, tf.ReadAllBytes()));
                 Assert.True(this.ByteArraysAreSame(File.ReadAllBytes(tf.FullPath), tf.ReadAllBytes()));
             }
         }

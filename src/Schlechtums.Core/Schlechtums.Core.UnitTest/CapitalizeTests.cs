@@ -1,29 +1,30 @@
 ﻿using Schlechtums.Core.Common.Extensions;
-using Xunit;
+using NUnit.Framework;
+using FluentAssertions;
 
 namespace Schlechtums.Core.UnitTest
 {
     public class CapitalizeTests
     {
-        [Fact]
+        [Test]
         public void NoSeparator()
         {
             var str = "helloWorld";
-            Assert.Equal("Helloworld", str.SnakeCaseToPascalCase());
+            str.SnakeCaseToPascalCase().Should().Be("Helloworld");
         }
 
-        [Fact]
+        [Test]
         public void JsonAttributeCapitalized()
         {
             var str = "hEllo_world";
-            Assert.Equal("Hello_World", str.Capitalize(true, '_'));
+            str.Capitalize(true, '_').Should().Be("Hello_World");
         }
 
-        [Fact]
+        [Test]
         public void JsonAttributeCapitalizedDoNotKeepDelimiter()
         {
             var str = "hEllo_world";
-            Assert.Equal("HelloWorld", str.Capitalize(false, '_'));
+            str.Capitalize(false, '_').Should().Be("HelloWorld");
         }
     }
 }
